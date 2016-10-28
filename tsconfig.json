@@ -5,9 +5,14 @@
     "noImplicitAny": true,
     "module": "commonjs",
     "target": "es5",
-    "jsx": "react"
+    "moduleResolution": "node",
+    "jsx": "react",
+    "allowSyntheticDefaultImports": true
   },
   "include": [
     "./src/*"
+  ],
+  "exclude": [
+    "node_modules"
   ]
 }

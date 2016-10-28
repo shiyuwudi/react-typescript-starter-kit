@@ -144,7 +144,8 @@ webpackConfig.module.loaders.push({
 })
 
 webpackConfig.module.loaders.push({
-    test: /\.tsx/,
+    test: /\.(ts|tsx)$/,
+    exclude: /node_modules/,
     loader: "ts-loader"
 })
 
