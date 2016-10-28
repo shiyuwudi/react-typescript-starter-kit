@@ -1,0 +1,45 @@
+.core-layout__viewport {
+  padding-top: 4rem;
+}
+
+.HolyGrail {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+header,
+footer {
+  flex: 1;
+}
+
+.HolyGrail-body {
+  display: flex;
+  flex: 1;
+}
+
+.HolyGrail-content {
+  flex: 1;
+}
+
+.HolyGrail-nav, .HolyGrail-ads {
+  /* 两个边栏的宽度设为12em */
+  flex: 0 0 20%;
+}
+
+.HolyGrail-nav {
+  /* 导航放到最左边 */
+  order: -1;
+}
+
+@media (max-width: 768px) {
+  .HolyGrail-body {
+    flex-direction: column;
+    flex: 1;
+  }
+  .HolyGrail-nav,
+  .HolyGrail-ads,
+  .HolyGrail-content {
+    flex: auto;
+  }
+}
