@@ -26,8 +26,8 @@ class CoreLayout extends React.Component<CoreLayoutProps, CoreLayoutState> {
     };
 
     render() {
+
         const collapse = this.state.collapse;
-        console.log(collapse);
         return (
             <div className={collapse ? "ant-layout-aside ant-layout-aside-collapse" : "ant-layout-aside"}>
                 <aside className="ant-layout-sider">
@@ -53,6 +53,7 @@ class CoreLayout extends React.Component<CoreLayoutProps, CoreLayoutState> {
                         {collapse ? <Icon type="right"/> : <Icon type="left"/>}
                     </div>
                 </aside>
+
                 <div className="ant-layout-main">
                     <div className="ant-layout-header"></div>
                     <div className="ant-layout-breadcrumb">
@@ -64,9 +65,7 @@ class CoreLayout extends React.Component<CoreLayoutProps, CoreLayoutState> {
                     </div>
                     <div className="ant-layout-container">
                         <div className="ant-layout-content">
-                            <div style={{ height: 220 }}>
-                                {this.props.children}
-                            </div>
+                            {this.props.children}
                         </div>
                     </div>
                     <div className="ant-layout-footer">
