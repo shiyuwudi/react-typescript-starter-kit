@@ -4,6 +4,7 @@ import createStore from './store/createStore'
 import AppContainer from './containers/AppContainer'
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import './styles/core.less'
 
 injectTapEventPlugin();
 // ========================================================
