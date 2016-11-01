@@ -1,3 +1,4 @@
+require('babel-polyfill')
 var argv = require('yargs').argv;
 var path = require('path');
 

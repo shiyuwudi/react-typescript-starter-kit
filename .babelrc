@@ -3,13 +3,13 @@
     [
       "import",
       {
-        libraryName: "antd",
-        style: "css"
+        "libraryName": "antd",
+        "style": "css"
       }
     ]
   ],
   "presets": [
+    "es2015",
     "react",
-    "es2015"
   ]
 }
