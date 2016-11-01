@@ -14,7 +14,8 @@ module.exports = function (config) {
         files: [
             'node_modules/babel-polyfill/dist/polyfill.js',
             './node_modules/phantomjs-polyfill/bind-polyfill.js',
-            './test/**/*.js' // specify files to watch for tests
+            './test/**/*.js', // specify files to watch for tests
+            './test/**/*.tsx' // specify files to watch for tests
         ],
         preprocessors: {
             // these files we want to be precompiled with webpack
@@ -29,7 +30,7 @@ module.exports = function (config) {
                 root: path.resolve(__dirname, './src'),
 
                 // allow us to avoid including extension name
-                extensions: ['', '.js', '.jsx'],
+                extensions: ['', '.js', '.jsx', '.ts', '.tsx', '.less'],
 
                 // required for enzyme to work properly
                 alias: {
@@ -43,8 +44,9 @@ module.exports = function (config) {
                 ],
                 // run babel loader for our tests
                 loaders: [
-                    {test: /\.js?$/, exclude: /node_modules/, loader: 'babel'},
-                ],
+                    {test: /\.(js|jsx)$/, exclude: /node_modules/, loader: 'babel'},
+                    {test: /\.(ts|tsx)$/, exclude: /node_modules/, loader: "ts-loader"},
+                    {test: /\.less$/, exclude: /node_modules/, loader: "style!css!less"}],
             },
             // required for enzyme to work properly
             externals: {
