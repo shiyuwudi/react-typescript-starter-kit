@@ -1,33 +1,20 @@
-import React from 'react'
-import TestUtils from 'react-addons-test-utils'
-import CoreLayout from 'layouts/CoreLayout/CoreLayout'
+import React from 'react';
+import TestUtils from 'react-addons-test-utils';
+import {Col, Row} from 'antd'
 
-function shallowRender (component) {
-  const renderer = TestUtils.createRenderer()
-
-  renderer.render(component)
-  return renderer.getRenderOutput()
-}
-
-function shallowRenderWithProps (props = {}) {
-  return shallowRender(<CoreLayout {...props} />)
-}
-
-describe('(Layout) Core', function () {
-  let _component
-  let _props
-  let _child
-
-  beforeEach(function () {
-    _child = <h1 className='child'>Child</h1>
-    _props = {
-      children: _child
-    }
-
-    _component = shallowRenderWithProps(_props)
-  })
-
-  it('Should render as a <div>.', function () {
-    expect(_component.type).to.equal('div')
-  })
-})
+describe('Layout', function () {
+    it('should render Col', () => {
+        const col = TestUtils.renderIntoDocument(
+            <Col span="2"></Col>
+        );
+        const colNode = TestUtils.findRenderedDOMComponentWithTag(col, 'DIV');
+        expect(colNode.className).toBe('ant-col-2');
+    });
+    it('should render Row', () => {
+        const row = TestUtils.renderIntoDocument(
+            <Row></Row>
+        );
+        const rowNode = TestUtils.findRenderedDOMComponentWithTag(row, 'DIV');
+        expect(rowNode.className).toBe('ant-row');
+    });
+});
