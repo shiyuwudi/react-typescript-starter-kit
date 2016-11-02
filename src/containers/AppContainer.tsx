@@ -26,5 +26,4 @@ class AppContainer extends React.Component<AppProps, any> {
   }
 }
 
-
 export default AppContainer
