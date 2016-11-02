@@ -4,12 +4,12 @@
       "import",
       {
         "libraryName": "antd",
-        "style": "css"
+        "style": true
       }
     ]
   ],
   "presets": [
     "es2015",
-    "react",
+    "react"
   ]
 }

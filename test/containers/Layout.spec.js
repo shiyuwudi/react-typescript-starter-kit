@@ -1,14 +1,21 @@
 import React from 'react';
 import {expect} from 'chai';
 import TestUtils from 'react-addons-test-utils';
-import App from '../../src/layouts/CoreLayout';
+import {shallow} from 'enzyme';
+import Layout from '../../src/layouts/CoreLayout/CoreLayout';
 
-describe('DOM Rendering', function () {
-    it('Click the delete button, the Todo item should be deleted', function () {
-        const app = TestUtils.renderIntoDocument(<App/>);
-        let todoItems = TestUtils.scryRenderedDOMComponentsWithTag(app, 'div');
-        let todoLength = todoItems.length;
-        expect(todoLength).to.equal(10);
+describe('(layout) Core', function () {
+    const wrapper = shallow(<Layout />);
+
+    it('renders as a <div>', () => {
+        expect(wrapper.type()).to.eql('div');
+    });
+
+    it('菜单默认关闭', () => {
+        expect(wrapper.find('.ant-layout-aside')).to.have.length(1);
+    });
+
+    it('5个导航菜单', function () {
+        expect(wrapper.find('.nav-text')).to.have.length(5);
     });
 });
-
