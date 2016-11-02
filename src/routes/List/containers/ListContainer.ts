@@ -2,14 +2,14 @@
  * Created by lixiaoyang on 2016/10/29.
  */
 import List from '../components/List';
-import { connect } from 'react-redux';
-import { clearCompleted } from '../actions/action';
+import {connect} from 'react-redux';
+import {clearCompleted} from '../actions/action';
 
 const mapDispatchToProps = {
   clearCompleted,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: any) => ({
   list: state.list,
 });
 
