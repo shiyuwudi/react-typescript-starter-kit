@@ -1,3 +1,4 @@
+require('babel-polyfill');
 import React from 'react';
 import ReactDOM from 'react-dom';
 import createStore from './store/createStore';
@@ -22,8 +23,8 @@ let render = () => {
 
   ReactDOM.render(
     <AppContainer store={store} routes={routes} />,
-        MOUNT_NODE
-    );
+    MOUNT_NODE
+  );
 };
 
 // ========================================================
@@ -38,7 +39,7 @@ if (__DEV__) {
 // This code is excluded from production bundle
 if (__DEV__) {
   if (module.hot) {
-        // Development render functions
+    // Development render functions
     const renderApp = render;
     const renderError = (error) => {
       const RedBox = require('redbox-react').default;
@@ -46,7 +47,7 @@ if (__DEV__) {
       ReactDOM.render(<RedBox error={error} />, MOUNT_NODE);
     };
 
-        // Wrap render in try/catch
+    // Wrap render in try/catch
     render = () => {
       try {
         renderApp();
@@ -55,13 +56,13 @@ if (__DEV__) {
       }
     };
 
-        // Setup hot module replacement
+    // Setup hot module replacement
     module.hot.accept('./routes/index', () =>
-            setImmediate(() => {
-              ReactDOM.unmountComponentAtNode(MOUNT_NODE);
-              render();
-            })
-        );
+      setImmediate(() => {
+        ReactDOM.unmountComponentAtNode(MOUNT_NODE);
+        render();
+      })
+    );
   }
 }
 
