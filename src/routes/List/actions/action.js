@@ -3,19 +3,19 @@
  */
 export const CLEAR_COMPLETED = 'CLEAR_COMPLETED';
 
-export const clearCompleted = (ipArr) => {
-    return (dispatch, getState) => {
-        fetch('/tomcat/shutdown/' + ipArr.join('-'))
-            .then((response)=> {
-                return response.blob();
-            })
-            .then(myBlob=> {
-                URL.createObjectURL(myBlob);
-                console.log(myBlob)
+export const clearCompleted = ipArr =>
+   (dispatch, getState) => {
+     fetch(`/tomcat/shutdown/${ipArr.join('-')}`)
+            .then(response =>
+                 response.blob()
+            )
+            .then((myBlob) => {
+              URL.createObjectURL(myBlob);
+              console.log(myBlob);
             });
-        dispatch({
-            type: CLEAR_COMPLETED,
-            payload: 123
-        });
-    }
-}
+     dispatch({
+       type: CLEAR_COMPLETED,
+       payload: 123,
+     });
+   }
+;
