@@ -4,7 +4,7 @@
     "sourceMap": true,
     "noImplicitAny": true,
     "module": "commonjs",
-    "target": "es5e",
+    "target": "es5",
     "moduleResolution": "node",
     "jsx": "react",
     "allowSyntheticDefaultImports": true
