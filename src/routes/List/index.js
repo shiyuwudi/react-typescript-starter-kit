@@ -1,7 +1,7 @@
 /**
  * Created by lixiaoyang on 2016/10/29.
  */
-import { injectReducer } from '../../store/reducers.js';
+import { injectReducer } from '../../store/reducers';
 
 export default store => ({
   path: '／',

@@ -1,10 +1,10 @@
-require('babel-polyfill');
 import React from 'react';
 import ReactDOM from 'react-dom';
-import createStore from './store/createStore';
-import AppContainer from './containers/AppContainer';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import createStore from './store/createStore';
+import AppContainer from './containers/AppContainer.tsx';
 import './styles/core.less';
+require('babel-polyfill');
 
 injectTapEventPlugin();
 // ========================================================
@@ -23,7 +23,7 @@ let render = () => {
 
   ReactDOM.render(
     <AppContainer store={store} routes={routes} />,
-    MOUNT_NODE
+    MOUNT_NODE,
   );
 };
 
@@ -61,7 +61,7 @@ if (__DEV__) {
       setImmediate(() => {
         ReactDOM.unmountComponentAtNode(MOUNT_NODE);
         render();
-      })
+      }),
     );
   }
 }
