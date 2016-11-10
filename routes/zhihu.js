@@ -15,9 +15,10 @@ router.get('/api/4/news/latest', function (req, res) {
     })
 });
 
-router.get('/api/4/news/latest', function (req, res) {
+router.get('/api/4/news/:id', function (req, res) {
+    var id = req.params.id;
     reqwest({
-        url: 'http://news-at.zhihu.com/api/4/news/latest'
+        url: `http://news-at.zhihu.com/api/4/news/${id}`
         , method: 'get'
         , success: function (resp) {
             res.send(resp);

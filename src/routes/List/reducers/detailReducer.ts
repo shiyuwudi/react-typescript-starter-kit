@@ -2,17 +2,17 @@
  * Created by lixiaoyang on 2016/10/29.
  */
 import {
-  LIST,
+  DETAIL,
 } from '../actions/action';
 
 const ACTION_HANDLERS = {
-  [LIST]: (state: any, action: any) => action.data.stories,
+  [DETAIL]: (state: any, action: any) => action.data,
 };
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState: any[] = [];
+const initialState: any = {};
 export default function listReducer(state = initialState, action: any) {
   const handler = ACTION_HANDLERS[action.type];
 
