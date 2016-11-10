@@ -4,6 +4,7 @@
 const ZHIHU: string = 'ZHIHU';
 export const LIST: string = ZHIHU + 'LIST';
 export const DETAIL: string = ZHIHU + 'DETAIL';
+export const HIDE: string = ZHIHU + 'HIDE';
 
 export const fetchList = (ipArr: number[]) => {
   return (dispatch: any, getState: any) => {
@@ -30,3 +31,11 @@ export const fetchDetail = (id: number)=> {
       });
   }
 };
+
+export const hide = ()=> {
+  return (dispatch: any, getState: any) => {
+    dispatch({
+      type: HIDE,
+    });
+  }
+}

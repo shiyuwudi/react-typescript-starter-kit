@@ -5,11 +5,12 @@ import * as React from "react";
 import {connect} from 'react-redux';
 import List from '../components/List';
 import Detail from '../components/Detail';
-import {fetchList, fetchDetail} from '../actions/action';
+import {fetchList, fetchDetail, hide} from '../actions/action';
 
 const mapDispatchToProps = {
   fetchList,
-  fetchDetail
+  fetchDetail,
+  hide
 };
 
 const mapStateToProps = (state: any) => ({
@@ -21,12 +22,15 @@ class ListContainer extends React.Component<any, any> {
   render() {
     let {
       list,
-      detail
+      detail,
+      hide
     }=this.props;
 
     return <div>
       <List {...this.props}/>
-      <Detail detail={detail}/>
+      <Detail detail={detail}
+              hide={hide}
+      />
     </div>
   }
 }
