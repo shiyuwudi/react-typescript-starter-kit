@@ -6,7 +6,7 @@ import {
 } from '../actions/action';
 
 const ACTION_HANDLERS = {
-  [LIST]: (state: any, action: any) => action.data,
+  [LIST]: (state: any, action: any) => action.data.stories,
 };
 
 // ------------------------------------
