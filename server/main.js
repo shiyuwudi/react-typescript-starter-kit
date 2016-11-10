@@ -4,11 +4,13 @@ const webpack = require('webpack');
 const webpackConfig = require('../build/webpack.config');
 const config = require('../config');
 
+const zhihu = require('../routes/zhihu');
 const routes = require('../routes/index');
 const users = require('../routes/users');
 
 const app = express();
 
+app.use('/', zhihu);
 app.use('/tomcat', routes);
 app.use('/users', users);
 

@@ -164,6 +164,7 @@
     "phantomjs-prebuilt": "^2.1.12",
     "react-addons-test-utils": "^15.0.0",
     "redbox-react": "^1.2.10",
+    "reqwest": "^2.0.5",
     "sinon": "^1.17.6",
     "sinon-chai": "^2.8.0",
     "source-map-loader": "^0.1.5",
@@ -171,6 +172,7 @@
     "ts-node": "^1.7.0",
     "typescript": "^2.0.8",
     "webpack-dev-middleware": "^1.6.1",
-    "webpack-hot-middleware": "^2.13.1"
+    "webpack-hot-middleware": "^2.13.1",
+    "xhr2": "^0.1.3"
   }
 }

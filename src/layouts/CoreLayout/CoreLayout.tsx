@@ -10,14 +10,23 @@ interface CoreLayoutState {
   collapse: boolean;
 }
 
+export let height = 0;
+
 class CoreLayout extends React.Component<CoreLayoutProps, CoreLayoutState> {
 
   constructor(props: any, context: any) {
     super(props, context);
+    height = document.body.clientHeight - 340;
     this.state = {
       collapse: true,
     };
   }
+
+  componentDidMount = ()=> {
+    window.onresize = ()=> {
+      height = document.body.clientHeight - 340;
+    }
+  };
 
   onCollapseChange = ()=> {
     this.setState({
@@ -63,10 +72,8 @@ class CoreLayout extends React.Component<CoreLayoutProps, CoreLayoutState> {
               <Breadcrumb.Item>某应用</Breadcrumb.Item>
             </Breadcrumb>
           </div>
-          <div className="ant-layout-container">
-            <div className="ant-layout-content">
-              {this.props.children}
-            </div>
+          <div className="ant-layout-content">
+            {this.props.children}
           </div>
           <div className="ant-layout-footer">
             Ant Design 版权所有 © 2015 由蚂蚁金服体验技术部支持

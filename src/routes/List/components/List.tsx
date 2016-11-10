@@ -1,34 +1,20 @@
 import * as React from "react";
 import {Button, Table} from 'antd';
 import './style.less'
+import {height} from '../../../layouts/CoreLayout/CoreLayout'
 
 const columns = [{
-  title: 'Name',
-  dataIndex: 'name',
-  render: (text: String) => <a href="#">{text}</a>,
+  title: 'id',
+  dataIndex: 'id',
 }, {
-  title: 'Age',
-  dataIndex: 'age',
+  title: 'title',
+  dataIndex: 'title',
 }, {
-  title: 'Address',
-  dataIndex: 'address',
+  title: 'type',
+  dataIndex: 'type',
+  render: (type: String) => <a href="#">{type}</a>,
 }];
-const data: any[] = [{
-  key: '1',
-  name: 'John Brown',
-  age: 32,
-  address: 'New York No. 1 Lake Park',
-}, {
-  key: '2',
-  name: 'Jim Green',
-  age: 42,
-  address: 'London No. 1 Lake Park',
-}, {
-  key: '3',
-  name: 'Joe Black',
-  age: 32,
-  address: 'Sidney No. 1 Lake Park',
-}];
+
 
 const rowSelection = {
   onChange(selectedRowKeys: any, selectedRows: any) {
@@ -42,17 +28,24 @@ class List extends React.Component<any, any> {
     super(props);
   }
 
+  componentDidMount = ()=> {
+    this.props.fetchList();
+  };
+
   render() {
+    let {list}=this.props;
     return (<div>
       <div style={{ marginBottom: 16 }}>
-        <Button type="primary">
+        <Button type="primary"
+                onClick={this.props.fetchList}>
           删除
         </Button>
       </div>
 
       <Table rowSelection={rowSelection}
+             scroll={{y:height}}
              columns={columns}
-             dataSource={data}/>
+             dataSource={list}/>
     </div>)
   }
 }

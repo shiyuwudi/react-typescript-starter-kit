@@ -3,10 +3,10 @@
  */
 import List from '../components/List';
 import {connect} from 'react-redux';
-import {clearCompleted} from '../actions/action';
+import {fetchList} from '../actions/action';
 
 const mapDispatchToProps = {
-  clearCompleted,
+  fetchList,
 };
 
 const mapStateToProps = (state: any) => ({

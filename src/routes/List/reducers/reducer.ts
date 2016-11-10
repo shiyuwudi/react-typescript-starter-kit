@@ -2,18 +2,18 @@
  * Created by lixiaoyang on 2016/10/29.
  */
 import {
-  CLEAR_COMPLETED,
+  LIST,
 } from '../actions/action';
 
 const ACTION_HANDLERS = {
-  [CLEAR_COMPLETED]: (state:any, action:any) => state + action.payload,
+  [LIST]: (state: any, action: any) => action.data.stories,
 };
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = 0;
-export default function listReducer(state = initialState, action:any) {
+const initialState: any[] = [];
+export default function listReducer(state = initialState, action: any) {
   const handler = ACTION_HANDLERS[action.type];
 
   return handler ? handler(state, action) : state;
