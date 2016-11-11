@@ -13,8 +13,10 @@ class List extends React.Component<any, any> {
 
     return (<Modal title="详情" visible={detail.visible}
                    onOk={hide} onCancel={hide}
+                   width={1000}
     >
-      <p>{detail && detail.data && detail.data.title}</p>
+      <div dangerouslySetInnerHTML={{__html:detail && detail.data && detail.data.title}}></div>
+      <div dangerouslySetInnerHTML={{__html:detail && detail.data && detail.data.body}}></div>
     </Modal>);
   }
 }
