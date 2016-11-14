@@ -12,6 +12,7 @@
     "compile": "better-npm-run compile",
     "lint": "eslint src",
     "lint:fix": "npm run lint -- --fix",
+    "tslint": "tslint src/**/*.tsx src/**/*.ts",
     "start": "better-npm-run start",
     "dev": "better-npm-run dev",
     "test": "node_modules/.bin/karma start karma.conf.js",
