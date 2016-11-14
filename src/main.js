@@ -4,6 +4,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import createStore from './store/createStore';
 import AppContainer from './containers/AppContainer.tsx';
 import './styles/core.less';
+
 require('babel-polyfill');
 
 injectTapEventPlugin();
