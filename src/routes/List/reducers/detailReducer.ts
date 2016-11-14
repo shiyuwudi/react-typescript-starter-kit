@@ -11,19 +11,19 @@ const ACTION_HANDLERS = {
     return {
       data: action.data,
       visible: true
-    }
+    };
   },
   [HIDE]: (state: any, action: any) => {
     return {
       visible: false
-    }
+    };
   },
 };
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState: any = {visible: false,};
+const initialState: any = {visible: false};
 export default function listReducer(state = initialState, action: any) {
   const handler = ACTION_HANDLERS[action.type];
 

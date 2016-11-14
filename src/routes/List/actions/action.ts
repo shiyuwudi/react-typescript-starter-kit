@@ -16,10 +16,10 @@ export const fetchList = (ipArr: number[]) => {
           data: json,
         });
       });
-  }
+  };
 };
 
-export const fetchDetail = (id: number)=> {
+export const fetchDetail = (id: number) => {
   return (dispatch: any, getState: any) => {
     fetch(`/api/4/news/${id}`)
       .then((response: any) => response.json())
@@ -29,13 +29,13 @@ export const fetchDetail = (id: number)=> {
           data: json,
         });
       });
-  }
+  };
 };
 
-export const hide = ()=> {
+export const hide = () => {
   return (dispatch: any, getState: any) => {
     dispatch({
       type: HIDE,
     });
-  }
-}
+  };
+};

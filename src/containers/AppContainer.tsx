@@ -1,6 +1,6 @@
-import * as React from 'react'
-import {browserHistory, Router} from 'react-router'
-import {Provider} from 'react-redux'
+import * as React from 'react';
+import {browserHistory, Router} from 'react-router';
+import {Provider} from 'react-redux';
 
 export interface AppProps {
   routes: any;
@@ -10,11 +10,11 @@ export interface AppProps {
 class AppContainer extends React.Component<AppProps, any> {
 
   shouldComponentUpdate() {
-    return false
+    return false;
   }
 
   render() {
-    const {routes, store} = this.props
+    const {routes, store} = this.props;
 
     return (
       <Provider store={store}>
@@ -22,8 +22,8 @@ class AppContainer extends React.Component<AppProps, any> {
           <Router history={browserHistory} children={routes}/>
         </div>
       </Provider>
-    )
+    );
   }
 }
 
-export default AppContainer
+export default AppContainer;
