@@ -4,7 +4,7 @@
 import * as React from "react";
 import {connect} from 'react-redux';
 import List from '../components/List';
-import Detail from '../components/Detail';
+import Detail from '../components/Edit';
 import {fetchList, fetchDetail, hide} from '../actions/action';
 
 const mapDispatchToProps = {
@@ -14,7 +14,7 @@ const mapDispatchToProps = {
 };
 
 const mapStateToProps = (state: any) => ({
-  list: state.listReducer,
+  listState: state.listReducer,
   detail: state.detailReducer
 });
 

@@ -84,7 +84,7 @@
     "@types/react-dom": "^0.14.18",
     "@types/react-redux": "^4.4.32",
     "@types/react-router": "^2.0.38",
-    "antd": "^2.3.1",
+    "antd": "^2.4.2",
     "babel-core": "^6.17.0",
     "babel-loader": "^6.2.5",
     "babel-plugin-import": "^1.0.1",
