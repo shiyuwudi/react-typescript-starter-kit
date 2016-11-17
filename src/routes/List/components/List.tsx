@@ -3,11 +3,6 @@ import {Button, Table, Popconfirm, Row, Col, Icon} from 'antd';
 import './style.less'
 import {height} from '../../../layouts/CoreLayout/CoreLayout'
 
-const rowSelection = {
-  onChange(selectedRowKeys: any, selectedRows: any) {
-    console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-  },
-};
 
 export interface ListProps {
   fetchList: any,
@@ -23,6 +18,9 @@ class List extends React.Component<ListProps, any> {
 
   constructor(props: any) {
     super(props);
+    this.state = {
+      selected: false
+    };
   }
 
   componentDidMount = ()=> {
@@ -77,6 +75,18 @@ class List extends React.Component<ListProps, any> {
     }];
 
     let {listState}=this.props;
+
+    const rowSelection = {
+      onChange: ((selectedRowKeys: any, selectedRows: any)=> {
+
+        this.setState({
+          selected: true
+        });
+
+        console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+      }),
+    };
+
     return (<div>
       <Row style={{marginBottom: 16}}>
         <Col span={12}>
@@ -84,6 +94,7 @@ class List extends React.Component<ListProps, any> {
                       placement="bottomLeft"
                       onConfirm={()=>this.props.loadEditData(-1)}>
             <Button type="primary"
+                    disabled={!this.state.selected}
                     loading={listState.listLoading}>
               删除
             </Button>
