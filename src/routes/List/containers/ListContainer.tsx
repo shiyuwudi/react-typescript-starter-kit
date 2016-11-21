@@ -5,11 +5,11 @@ import * as React from "react";
 import {connect} from 'react-redux';
 import List from '../components/List';
 import Detail from '../components/Edit';
-import {fetchList, fetchDetail, hide} from '../actions/action';
+import {fetchList, fetchEdit, hide} from '../actions/action';
 
 const mapDispatchToProps = {
   fetchList,
-  fetchDetail,
+  fetchEdit,
   hide
 };
 

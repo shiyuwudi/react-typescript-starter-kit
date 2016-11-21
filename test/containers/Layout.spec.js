@@ -1,7 +1,6 @@
 import React from 'react';
-import { expect } from 'chai';
-import TestUtils from 'react-addons-test-utils';
-import { shallow, render, mount } from 'enzyme';
+import {expect} from 'chai';
+import {shallow} from 'enzyme';
 import Layout from '../../src/layouts/CoreLayout/CoreLayout';
 
 describe('(layout) Core', () => {
