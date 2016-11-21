@@ -2,16 +2,18 @@ import * as React from "react";
 import {Button, Table, Popconfirm, Row, Col, Icon} from 'antd';
 import './style.less'
 import {height} from '../../../layouts/CoreLayout/CoreLayout'
+import SearchInput from '../../../components/SearchInput'
+import ColumnPicker from "../../../components/ColumnPicker";
 
 
 export interface ListProps {
   fetchList: any,
-  fetchDetail: any,
-  fetchEdit: any,
+  fetchEdit: (id: any) => void,
   fetchDel: any,
   listState: any,
   multiDel: any,
-  loadEditData: any
+  loadEditData: any,
+  onSearch: any
 }
 
 class List extends React.Component<ListProps, any> {
@@ -25,10 +27,6 @@ class List extends React.Component<ListProps, any> {
 
   componentDidMount = ()=> {
     this.props.fetchList();
-  };
-
-  showDetail = (id: number)=> {
-    this.props.fetchDetail(id);
   };
 
   render() {
@@ -95,13 +93,13 @@ class List extends React.Component<ListProps, any> {
                       onConfirm={()=>this.props.loadEditData(-1)}>
             <Button type="primary"
                     disabled={!this.state.selected}
-                    loading={listState.listLoading}>
+                    loading={listState.delLoading}>
               删除
             </Button>
           </Popconfirm>
           <Button type="ghost"
                   style={{marginLeft: 8}}
-                  onClick={()=>this.props.loadEditData(-1)}>
+                  onClick={()=>this.props.fetchEdit(-1)}>
             新增
           </Button>
 
@@ -111,6 +109,15 @@ class List extends React.Component<ListProps, any> {
         </Col>
         <Col span={12}
              style={{float: 'right'}}>
+          <SearchInput
+            placeholder="请输入品牌名称"
+            onSearch={this.props.onSearch}
+            style={{float: 'right', width: 200}}/>
+          <ColumnPicker
+            columns={columns}
+            select_columns={this.state.select_columns}
+            style={{float: 'right', marginLeft: 8}}
+            handleColumnChange={this.props.loadEditData}/>
         </Col>
       </Row>
 

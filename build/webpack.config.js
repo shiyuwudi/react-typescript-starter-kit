@@ -39,6 +39,7 @@ webpackConfig.entry = {
     ? [APP_ENTRY].concat(`webpack-hot-middleware/client?path=${config.compiler_public_path}__webpack_hmr`)
     : [APP_ENTRY],
   vendor: config.compiler_vendors,
+  common: ['react', 'react-dom', 'react-router']
 };
 
 // ------------------------------------

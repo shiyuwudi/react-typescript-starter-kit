@@ -28,7 +28,7 @@ const dispatchListLoading = (data: boolean)=> {
 export const fetchList = (ipArr: number[]) => {
   return (dispatch: any, getState: any) => {
     dispatch(dispatchListLoading(true));
-    fetch('http://localhost:70/erp/brand_list.htm', {
+    fetch('/erp/brand_list.htm', {
       credentials: 'same-origin'
     })
       .then((response: any) => response.json())
@@ -42,9 +42,9 @@ export const fetchList = (ipArr: number[]) => {
   };
 };
 
-export const fetchDetail = (id: number) => {
+export const fetchEdit = (id: any) => {
   return (dispatch: any, getState: any) => {
-    fetch(`/api/4/news/${id}`)
+    fetch('/erp/brand_list.htm')
       .then((response: any) => response.json())
       .then((json: any) => {
         dispatch({

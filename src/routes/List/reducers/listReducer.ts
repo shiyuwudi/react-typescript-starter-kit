@@ -23,7 +23,9 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState: any[] = [];
+const initialState: any = {
+  delLoading: false
+};
 export default function listReducer(state = initialState, action: any) {
   const handler = ACTION_HANDLERS[action.type];
   return handler ? handler(state, action) : state;
