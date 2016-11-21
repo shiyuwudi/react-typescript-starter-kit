@@ -1,16 +1,16 @@
 /**
  * Created by lixiaoyang on 2016/10/30.
  */
-const ZHIHU: string = 'ZHIHU/';
-export const LIST: string = ZHIHU + 'LIST';
-export const LIST_LOADING: string = ZHIHU + 'LIST_LOADING';
-export const SHOW: string = ZHIHU + 'SHOW';
-export const EDIT: string = ZHIHU + 'EDIT';
-export const SAVE: string = ZHIHU + 'SAVE';
-export const SAVE_LOADING: string = ZHIHU + 'SAVE_LOADING';
+const PATH: string = 'GOODSBRAND/';
+export const LIST: string = PATH + 'LIST';
+export const LIST_LOADING: string = PATH + 'LIST_LOADING';
+export const SHOW: string = PATH + 'SHOW';
+export const EDIT: string = PATH + 'EDIT';
+export const SAVE: string = PATH + 'SAVE';
+export const SAVE_LOADING: string = PATH + 'SAVE_LOADING';
 
-export const DETAIL: string = ZHIHU + 'DETAIL';
-export const HIDE: string = ZHIHU + 'HIDE';
+export const DETAIL: string = PATH + 'DETAIL';
+export const HIDE: string = PATH + 'HIDE';
 
 const dispatchList = (data: any[])=> {
   return {
