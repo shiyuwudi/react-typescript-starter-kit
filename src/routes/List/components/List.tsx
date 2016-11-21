@@ -4,6 +4,7 @@ import './style.less'
 import {height} from '../../../layouts/CoreLayout/CoreLayout'
 import SearchInput from '../../../components/SearchInput'
 import ColumnPicker from "../../../components/ColumnPicker";
+import NormalTable from "../../../components/NormalTable";
 
 
 export interface ListProps {
@@ -18,7 +19,7 @@ export interface ListProps {
 
 class List extends React.Component<ListProps, any> {
 
-  constructor(props: any) {
+  constructor(props: ListProps) {
     super(props);
     this.state = {
       selected: false
@@ -121,11 +122,11 @@ class List extends React.Component<ListProps, any> {
         </Col>
       </Row>
 
-      <Table rowSelection={rowSelection}
-             scroll={{y:height}}
-             loading={listState.listLoading}
-             columns={columns}
-             dataSource={listState.data}/>
+      <NormalTable rowSelection={rowSelection}
+                   scroll={{y:height}}
+                   loading={listState.listLoading}
+                   columns={columns}
+                   dataSource={listState.data}/>
     </div>)
   }
 }

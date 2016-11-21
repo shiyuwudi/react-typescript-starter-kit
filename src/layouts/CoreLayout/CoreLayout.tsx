@@ -16,7 +16,7 @@ class CoreLayout extends React.Component<CoreLayoutProps, CoreLayoutState> {
 
   constructor(props: any, context: any) {
     super(props, context);
-    height = document.body.clientHeight - 275;
+    height = document.body.clientHeight - 280;
     this.state = {
       collapse: true,
     };
@@ -24,7 +24,7 @@ class CoreLayout extends React.Component<CoreLayoutProps, CoreLayoutState> {
 
   componentDidMount = ()=> {
     window.onresize = ()=> {
-      height = document.body.clientHeight - 275;
+      height = document.body.clientHeight - 280;
     }
   };
 
@@ -64,14 +64,6 @@ class CoreLayout extends React.Component<CoreLayoutProps, CoreLayoutState> {
         </aside>
 
         <div className="ant-layout-main">
-          <div className="ant-layout-header"></div>
-          <div className="ant-layout-breadcrumb">
-            <Breadcrumb>
-              <Breadcrumb.Item>首页</Breadcrumb.Item>
-              <Breadcrumb.Item>应用列表</Breadcrumb.Item>
-              <Breadcrumb.Item>某应用</Breadcrumb.Item>
-            </Breadcrumb>
-          </div>
           <div className="ant-layout-content">
             {this.props.children}
           </div>
