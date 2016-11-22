@@ -122,11 +122,14 @@ class List extends React.Component<ListProps, any> {
         </Col>
       </Row>
 
-      <NormalTable rowSelection={rowSelection}
-                   scroll={{y:height}}
-                   loading={listState.listLoading}
-                   columns={columns}
-                   dataSource={listState.data}/>
+      <NormalTable
+        fetchList={this.props.fetchList}
+        rowSelection={rowSelection}
+        scroll={{y:height}}
+        loading={listState.listLoading}
+        columns={columns}
+        dataSource={listState.data}
+        pagination={listState.pagination}/>
     </div>)
   }
 }

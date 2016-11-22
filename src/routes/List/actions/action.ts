@@ -13,10 +13,9 @@ export const DETAIL: string = PATH + 'DETAIL';
 export const HIDE: string = PATH + 'HIDE';
 
 const dispatchList = (data: any[])=> {
-  return {
-    type: LIST,
-    data: data
-  }
+  return Object.assign({
+    type: LIST
+  }, data);
 };
 const dispatchListLoading = (data: boolean)=> {
   return {
@@ -25,15 +24,23 @@ const dispatchListLoading = (data: boolean)=> {
   }
 };
 
-export const fetchList = (ipArr: number[]) => {
+export const fetchList = (pagination: any) => {
   return (dispatch: any, getState: any) => {
     dispatch(dispatchListLoading(true));
+
+    let formData = new FormData();
+    for (let i in pagination) {
+      formData.append(i, pagination[i]);
+    }
+
     fetch('/erp/brand_list.htm', {
-      credentials: 'same-origin'
+      credentials: 'same-origin',
+      method: "POST",
+      body: formData
     })
       .then((response: any) => response.json())
       .then((response: any) => {
-        dispatch(dispatchList(response.data));
+        dispatch(dispatchList(response));
       })
       .catch((err) => {
         dispatch(dispatchListLoading(false));

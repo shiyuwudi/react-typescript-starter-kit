@@ -8,15 +8,20 @@ import {
 
 const ACTION_HANDLERS = {
   [LIST]: (state: any, action: any) => {
-    return {
+    return Object.assign({}, state, {
       data: action.data,
+      pagination: {
+        total: action.total,
+        pageSize: action.pageSize,
+        currentPage: action.currentPage,
+      },
       listLoading: false
-    };
+    });
   },
   [LIST_LOADING]: (state: any, action: any) => {
-    return {
+    return Object.assign({}, state, {
       listLoading: action.data
-    };
+    });
   },
 };
 
@@ -24,7 +29,8 @@ const ACTION_HANDLERS = {
 // Reducer
 // ------------------------------------
 const initialState: any = {
-  delLoading: false
+  delLoading: false,
+  pagination: {}
 };
 export default function listReducer(state = initialState, action: any) {
   const handler = ACTION_HANDLERS[action.type];
