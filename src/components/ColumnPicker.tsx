@@ -51,14 +51,14 @@ export default class ColumnPicker extends React.Component<SearchInputProps, any>
         chosenClass: "sortable-chosen",  // Class name for the chosen item
         onEnd: function (/**Event*/evt: any) {
           var itemEl = evt.from;
-          let arr = [];
+          let arr:any[]= [];
           let mylist = itemEl.childNodes;
           for (let i = 0; i < mylist.length; i++) {
             var li = mylist[i].childNodes[0];
             arr.push(li.innerText)
           }
 
-          let newarr = [];
+          let newarr:any[] = [];
           for (let i in arr) {
             for (let j in select_columns) {
               if (arr[i] == select_columns[j].title)
@@ -100,7 +100,7 @@ export default class ColumnPicker extends React.Component<SearchInputProps, any>
   componentDidMount = () => {
     var columns = this.props.columns;
 
-    var select_columns = [];
+    var select_columns:any[] = [];
     for (var index in columns) {
       select_columns.push({
         title: columns[index].title,
@@ -128,7 +128,7 @@ export default class ColumnPicker extends React.Component<SearchInputProps, any>
 
 
   render() {
-    let carr = [];
+    let carr:any[] = [];
     for (let index in this.state.select_columns) {
       let column = this.state.select_columns[index];
       carr.push(<div
