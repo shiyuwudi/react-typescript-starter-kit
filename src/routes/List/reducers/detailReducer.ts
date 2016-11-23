@@ -1,12 +1,15 @@
 /**
  * Created by lixiaoyang on 2016/10/29.
  */
-import {
-  DETAIL,
-  HIDE
-} from '../actions/action';
+import {DETAIL, HIDE, EDIT} from '../actions/actionTypes';
 
 const ACTION_HANDLERS = {
+  [EDIT]: (state: any, action: any) => {
+    return Object.assign({}, state, {
+      visible: true
+    });
+  },
+
   [DETAIL]: (state: any, action: any) => {
     return {
       data: action.data,

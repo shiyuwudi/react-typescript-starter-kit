@@ -3,8 +3,9 @@
  */
 import {
   LIST,
-  LIST_LOADING
-} from '../actions/action';
+  LIST_LOADING,
+  ROWSELECT
+} from '../actions/actionTypes';
 
 const ACTION_HANDLERS = {
   [LIST]: (state: any, action: any) => {
@@ -23,6 +24,12 @@ const ACTION_HANDLERS = {
       listLoading: action.data
     });
   },
+  [ROWSELECT]: (state: any, action: any) => {
+    return Object.assign({}, state, {
+      selectedRowKeys: action.selectedRowKeys,
+      selectedRows: action.selectedRows
+    });
+  },
 };
 
 // ------------------------------------
@@ -30,7 +37,9 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 const initialState: any = {
   delLoading: false,
-  pagination: {}
+  pagination: {},
+  selectedRowKeys: [],
+  selectedRows: [],
 };
 export default function listReducer(state = initialState, action: any) {
   const handler = ACTION_HANDLERS[action.type];

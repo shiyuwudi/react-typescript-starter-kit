@@ -8,22 +8,26 @@ import NormalTable from "../../../components/NormalTable";
 
 
 export interface ListProps {
+  listState: any,
+
+  onRowSelectChange: any,
+  selectedRowKeys: any[],
+  selectedRows: any[],
+
   fetchList: any,
   fetchEdit: (id: any) => void,
+
   fetchDel: any,
-  listState: any,
   multiDel: any,
   loadEditData: any,
-  onSearch: any
+  onSearch: any,
+
 }
 
 class List extends React.Component<ListProps, any> {
 
   constructor(props: ListProps) {
     super(props);
-    this.state = {
-      selected: false
-    };
   }
 
   componentDidMount = ()=> {
@@ -76,14 +80,8 @@ class List extends React.Component<ListProps, any> {
     let {listState}=this.props;
 
     const rowSelection = {
-      onChange: ((selectedRowKeys: any, selectedRows: any)=> {
-
-        this.setState({
-          selected: true
-        });
-
-        console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-      }),
+      onChange: this.props.onRowSelectChange,
+      selectedRowKeys: listState.selectedRowKeys,
     };
 
     return (<div>
@@ -93,7 +91,7 @@ class List extends React.Component<ListProps, any> {
                       placement="bottomLeft"
                       onConfirm={()=>this.props.loadEditData(-1)}>
             <Button type="primary"
-                    disabled={!this.state.selected}
+                    disabled={listState.selectedRowKeys.length==0}
                     loading={listState.delLoading}>
               删除
             </Button>
@@ -116,7 +114,7 @@ class List extends React.Component<ListProps, any> {
             style={{float: 'right', width: 200}}/>
           <ColumnPicker
             columns={columns}
-            select_columns={this.state.select_columns}
+            select_columns={[]}
             style={{float: 'right', marginLeft: 8}}
             handleColumnChange={this.props.loadEditData}/>
         </Col>

@@ -1,16 +1,4 @@
-/**
- * Created by lixiaoyang on 2016/10/30.
- */
-const PATH: string = 'GOODSBRAND/';
-export const LIST: string = PATH + 'LIST';
-export const LIST_LOADING: string = PATH + 'LIST_LOADING';
-export const SHOW: string = PATH + 'SHOW';
-export const EDIT: string = PATH + 'EDIT';
-export const SAVE: string = PATH + 'SAVE';
-export const SAVE_LOADING: string = PATH + 'SAVE_LOADING';
-
-export const DETAIL: string = PATH + 'DETAIL';
-export const HIDE: string = PATH + 'HIDE';
+import {LIST, LIST_LOADING, DETAIL, HIDE, ROWSELECT, EDIT} from "./actionTypes";
 
 const dispatchList = (data: any[])=> {
   return Object.assign({
@@ -22,6 +10,12 @@ const dispatchListLoading = (data: boolean)=> {
     type: LIST_LOADING,
     data: data
   }
+};
+const dispatchEdit = (data: any)=> {
+  return {
+    type: EDIT,
+    data: data
+  };
 };
 
 export const fetchList = (pagination: any) => {
@@ -51,14 +45,24 @@ export const fetchList = (pagination: any) => {
 
 export const fetchEdit = (id: any) => {
   return (dispatch: any, getState: any) => {
-    fetch('/erp/brand_list.htm')
-      .then((response: any) => response.json())
-      .then((json: any) => {
-        dispatch({
-          type: DETAIL,
-          data: json,
+    if (id != -1) {
+      let formData = new FormData();
+      formData.append('id', id);
+      fetch('/erp/brand_load.htm', {
+        credentials: 'same-origin',
+        method: "POST",
+        body: formData
+      })
+        .then((response: any) => response.json())
+        .then((response: any) => {
+          dispatch(dispatchEdit(response.data));
+        })
+        .catch((err) => {
+          dispatch(dispatchEdit({}));
         });
-      });
+    } else {
+      dispatch(dispatchEdit({}));
+    }
   };
 };
 
@@ -69,3 +73,15 @@ export const hide = () => {
     });
   };
 };
+
+export const onRowSelectChange = ((selectedRowKeys: any, selectedRows: any)=> {
+  return (dispatch: any, getState: any) => {
+    console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+    dispatch({
+      type: ROWSELECT,
+      selectedRowKeys,
+      selectedRows
+    });
+  };
+});
+
