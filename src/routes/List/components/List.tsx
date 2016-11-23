@@ -1,6 +1,6 @@
-import * as React from "react";
+import * as React from 'react';
 import {Button, Table, Popconfirm, Row, Col, Icon} from 'antd';
-import './style.less'
+import './style.less';
 import {height} from '../../../layouts/CoreLayout/CoreLayout'
 import SearchInput from '../../../components/SearchInput'
 import ColumnPicker from "../../../components/ColumnPicker";

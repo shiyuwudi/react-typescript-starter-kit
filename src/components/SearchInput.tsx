@@ -1,19 +1,19 @@
 /**
  * Created by lixiaoyang on 2016/4/8.
  */
-import * as React from "react";
+import * as React from 'react';
 import {Button, Icon, Input} from 'antd';
 import * as classNames from 'classnames';
 
 const InputGroup = Input.Group;
 
 export interface SearchInputProps {
-  placeholder: string,
-  onSearch: (key: any) => void,
-  style: any
+  placeholder: string;
+  onSearch: (key: any) => void;
+  style: any;
 }
 
-//搜索输入框
+// 搜索输入框
 export default class SearchInput extends React.Component<SearchInputProps, any> {
 
   constructor(props: any) {
@@ -25,20 +25,20 @@ export default class SearchInput extends React.Component<SearchInputProps, any> 
     };
   }
 
-  handleInputChange = (e: any)=> {
+  handleInputChange = (e: any) => {
     this.setState({
       edited: false,
       value: e.target.value,
     });
   };
 
-  handleFocus = (e: any)=> {
+  handleFocus = (e: any) => {
     this.setState({
       focus: e.target === document.activeElement,
     });
   };
 
-  handleFocusBlur = (e: any)=> {
+  handleFocusBlur = (e: any) => {
     this.setState({
       focus: e.target === document.activeElement,
     });

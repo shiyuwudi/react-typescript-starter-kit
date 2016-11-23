@@ -1,15 +1,15 @@
 /**
  * Created by lixiaoyang on 16/4/14.
  */
-import * as React from "react";
+import * as React from 'react';
 import {Popover, Button, Checkbox} from 'antd';
 import Sortable from 'sortablejs';
 
-export interface SearchInputProps {
-  columns: any[],
-  handleColumnChange: (key: any) => void,
-  select_columns: any,
-  style: any
+interface SearchInputProps {
+  columns: any[];
+  handleColumnChange: (key: any) => void;
+  select_columns: any;
+  style: any;
 }
 
 export default class ColumnPicker extends React.Component<SearchInputProps, any> {
@@ -44,21 +44,21 @@ export default class ColumnPicker extends React.Component<SearchInputProps, any>
     // check if backing instance not null
     if (componentBackingInstance) {
       let options = {
-        draggable: "div", // Specifies which items inside the element should be sortable
-        group: "shared",
+        draggable: 'div', // Specifies which items inside the element should be sortable
+        group: 'shared',
         animation: 150,
-        ghostClass: "sortable-ghost",  // Class name for the drop placeholder
-        chosenClass: "sortable-chosen",  // Class name for the chosen item
+        ghostClass: 'sortable-ghost',  // Class name for the drop placeholder
+        chosenClass: 'sortable-chosen',  // Class name for the chosen item
         onEnd: function (/**Event*/evt: any) {
-          var itemEl = evt.from;
-          let arr:any[]= [];
+          let itemEl = evt.from;
+          let arr: any[] = [];
           let mylist = itemEl.childNodes;
           for (let i = 0; i < mylist.length; i++) {
-            var li = mylist[i].childNodes[0];
+            let li = mylist[i].childNodes[0];
             arr.push(li.innerText)
           }
 
-          let newarr:any[] = [];
+          let newarr: any[] = [];
           for (let i in arr) {
             for (let j in select_columns) {
               if (arr[i] == select_columns[j].title)
@@ -69,7 +69,7 @@ export default class ColumnPicker extends React.Component<SearchInputProps, any>
 
         },
       };
-      var sortable = Sortable.create(componentBackingInstance, options);
+      let sortable = Sortable.create(componentBackingInstance, options);
 
       this.setState({
         sortable: sortable
@@ -98,10 +98,10 @@ export default class ColumnPicker extends React.Component<SearchInputProps, any>
 
 
   componentDidMount = () => {
-    var columns = this.props.columns;
+    let columns = this.props.columns;
 
-    var select_columns:any[] = [];
-    for (var index in columns) {
+    let select_columns: any[] = [];
+    for (let index in columns) {
       select_columns.push({
         title: columns[index].title,
         show: true
@@ -116,7 +116,7 @@ export default class ColumnPicker extends React.Component<SearchInputProps, any>
 
   componentWillReceiveProps = (nextProps: any)=> {
     if (!this.state.sorted) {
-      var columns = nextProps.select_columns;
+      let columns = nextProps.select_columns;
       if (columns) {
         this.setState({
           newarr: columns,
@@ -128,11 +128,11 @@ export default class ColumnPicker extends React.Component<SearchInputProps, any>
 
 
   render() {
-    let carr:any[] = [];
+    let carr: any[] = [];
     for (let index in this.state.select_columns) {
       let column = this.state.select_columns[index];
       carr.push(<div
-        style={{"padding": "5px 0"}}
+        style={{'padding': '5px 0'}}
         key={index}
         onMouseOver={()=>this.onMouseOver(column)}
         onMouseOut={()=>this.onMouseOut(column)}
@@ -147,13 +147,13 @@ export default class ColumnPicker extends React.Component<SearchInputProps, any>
         {
           column.move ? <div
             style={{width: 16, height: 16}}
-            className="anticon_move"
+            className='anticon_move'
           /> : null
         }
       </div>);
     }
     let content = (
-      <div className="chack_list">
+      <div className='chack_list'>
         <div ref={this.sortableGroupDecorator}>
           {carr}
         </div>
@@ -163,14 +163,14 @@ export default class ColumnPicker extends React.Component<SearchInputProps, any>
     return (
       <Popover
         content={content}
-        trigger="click"
-        placement="bottom"
+        trigger='click'
+        placement='bottom'
         visible={this.state.visible}
         onVisibleChange={this.handleVisibleChange}
         style={this.props.style}
       >
         <Button
-          type="ghost"
+          type='ghost'
           style={{
             width: 100,
             float: 'right',
