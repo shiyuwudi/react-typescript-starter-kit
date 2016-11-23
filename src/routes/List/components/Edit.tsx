@@ -1,9 +1,9 @@
-import * as React from "react";
-import {Modal, Button} from 'antd';
+import * as React from 'react';
+import {Modal} from 'antd';
 
 export interface EditProps {
-  editState: any,
-  hide: any
+  editState: any;
+  hide: any;
 }
 
 class List extends React.Component<EditProps, any> {
@@ -17,9 +17,9 @@ class List extends React.Component<EditProps, any> {
     let {
       editState,
       hide
-    }=this.props;
+    } = this.props;
 
-    return (<Modal title="详情"
+    return (<Modal title='详情'
                    visible={editState.visible}
                    onOk={hide}
                    onCancel={hide}
@@ -29,4 +29,4 @@ class List extends React.Component<EditProps, any> {
   }
 }
 
-export default List
+export default List;

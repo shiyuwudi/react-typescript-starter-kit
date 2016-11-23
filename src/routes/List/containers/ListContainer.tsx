@@ -1,9 +1,9 @@
 /**
  * Created by lixiaoyang on 2016/10/29.
  */
-import * as React from "react";
+import * as React from 'react';
 import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux'
+import {bindActionCreators} from 'redux';
 import List from '../components/List';
 import Detail from '../components/Edit';
 import {fetchList, fetchEdit, hide, onRowSelectChange} from '../actions/action';
@@ -15,7 +15,7 @@ class ListContainer extends React.Component<any, any> {
         <List {...this.props}/>
         <Detail {...this.props}/>
       </div>
-    )
+    );
   }
 }
 
@@ -28,7 +28,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state: any) => ({
   listState: state.listReducer,
-  editState: state.detailReducer
+  editState: state.editReducer
 });
 
 
