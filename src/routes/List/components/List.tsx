@@ -106,7 +106,7 @@ class List extends React.Component<ListProps, any> {
         <Col span={12}>
           <Popconfirm title='确定要删除这些品牌吗？'
                       placement='bottomLeft'
-                      onConfirm={()=>this.props.fetchDelete(listState.selectedRowKeys)}>
+                      onConfirm={() => this.props.fetchDelete(listState.selectedRowKeys)}>
             <Button type='primary'
                     disabled={listState.selectedRowKeys.length === 0}
                     loading={listState.delLoading}>
@@ -131,7 +131,7 @@ class List extends React.Component<ListProps, any> {
             style={{float: 'right', width: 200}}/>
           <ColumnPicker
             columns={columns}
-            select_columns={columns}
+            select_columns={this.state.select_columns}
             style={{float: 'right', marginLeft: 8}}
             handleColumnChange={this.handleColumnChange}/>
         </Col>
@@ -145,9 +145,8 @@ class List extends React.Component<ListProps, any> {
         columns={columns}
         dataSource={listState.data}
         pagination={listState.pagination}/>
-    </div>)
+    </div>);
   }
 }
 
-
-export default List
+export default List;
