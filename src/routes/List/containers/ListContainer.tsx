@@ -6,7 +6,10 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import List from '../components/List';
 import Detail from '../components/Edit';
-import {fetchList, fetchEdit, hide, onRowSelectChange, onFormChange, onFormSubmit, fetchDelete} from '../actions/action';
+import {
+  fetchList, fetchEdit, hide, onRowSelectChange, onFormChange, onFormSubmit, fetchDelete,
+  onSearch
+} from '../actions/action';
 
 class ListContainer extends React.Component<any, any> {
   render() {
@@ -26,7 +29,8 @@ const mapDispatchToProps = {
   onRowSelectChange,
   onFormChange,
   onFormSubmit,
-  fetchDelete
+  fetchDelete,
+  onSearch
 };
 
 const mapStateToProps = (state: any) => ({

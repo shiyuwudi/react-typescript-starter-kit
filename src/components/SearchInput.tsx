@@ -1,6 +1,3 @@
-/**
- * Created by lixiaoyang on 2016/4/8.
- */
 import * as React from 'react';
 import {Button, Icon, Input} from 'antd';
 import * as classNames from 'classnames';
@@ -9,14 +6,14 @@ const InputGroup = Input.Group;
 
 export interface SearchInputProps {
   placeholder: string;
-  onSearch: (key: any) => void;
+  onSearch: (keyword: any) => void;
   style: any;
 }
 
 // 搜索输入框
 export default class SearchInput extends React.Component<SearchInputProps, any> {
 
-  constructor(props: any) {
+  constructor(props: SearchInputProps) {
     super(props);
     this.state = {
       value: '',
@@ -44,8 +41,8 @@ export default class SearchInput extends React.Component<SearchInputProps, any> 
     });
   };
 
-  handleSearch = ()=> {
-    if (this.props.onSearch) {
+  handleSearch = () => {
+    if (this.state.value && this.props.onSearch) {
       this.props.onSearch(this.state.value);
       this.setState({
         edited: true
@@ -53,7 +50,7 @@ export default class SearchInput extends React.Component<SearchInputProps, any> 
     }
   };
 
-  cancelSearch = ()=> {
+  cancelSearch = () => {
     if (this.props.onSearch) {
       this.props.onSearch('');
       this.setState({
@@ -85,21 +82,21 @@ export default class SearchInput extends React.Component<SearchInputProps, any> 
           onBlur={this.handleFocusBlur}
           onPressEnter={this.handleSearch}
         />
-        <div className="ant-input-group-wrap">
+        <div className='ant-input-group-wrap'>
           {
             this.state.edited ?
               <Button
                 className={btnCls}
                 onClick={this.cancelSearch}
               >
-                <Icon type="cross"/>
+                <Icon type='cross'/>
               </Button>
               :
               <Button
                 className={btnCls}
                 onClick={this.handleSearch}
               >
-                <Icon type="search"/>
+                <Icon type='search'/>
               </Button>
           }
         </div>

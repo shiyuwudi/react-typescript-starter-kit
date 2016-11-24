@@ -138,3 +138,15 @@ export const fetchDelete = (ids: any[]) => {
       });
   };
 };
+export const onSearch = (form: any[]) => {
+  return (dispatch: any, getState: any) => {
+    dispatch(dispatchListLoading(true));
+    listApi(form)
+      .then((response: any) => {
+        dispatch(dispatchList(response));
+      })
+      .catch((err) => {
+        dispatch(dispatchListLoading(false));
+      });
+  };
+};

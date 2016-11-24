@@ -92,7 +92,7 @@ class List extends React.Component<ListProps, any> {
           </Popconfirm>
           <Button type='ghost'
                   style={{marginLeft: 8}}
-                  onClick={()=>this.props.fetchEdit(-1)}>
+                  onClick={() => this.props.fetchEdit(-1)}>
             新增
           </Button>
 
@@ -104,7 +104,7 @@ class List extends React.Component<ListProps, any> {
              style={{float: 'right'}}>
           <SearchInput
             placeholder='请输入品牌名称'
-            onSearch={this.props.onSearch}
+            onSearch={(keyword) => this.props.onSearch({goodsBrandName:keyword})}
             style={{float: 'right', width: 200}}/>
           <ColumnPicker
             columns={columns}
