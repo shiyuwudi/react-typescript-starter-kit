@@ -41,9 +41,12 @@ class Edit extends React.Component<EditProps, any> {
 
     return (
       <Modal title='详情'
+             maskClosable={false}
              visible={editState.visible}
              onOk={this.handleSubmit}
-             onCancel={hide}>
+             onCancel={hide}
+             confirmLoading={editState.saveLoading}
+             wrapClassName='vertical-center-modal'>
         <Form horizontal>
           <FormItem
             {...formItemLayout}

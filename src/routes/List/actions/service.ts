@@ -32,3 +32,12 @@ export const saveApi = (form: any) => {
   })
     .then((response: any) => response.json());
 };
+export const deleteApi = (form: any) => {
+  const formData = form2Form(form);
+  return fetch('/erp/brand_del.htm', {
+    credentials: 'same-origin',
+    method: 'POST',
+    body: formData
+  })
+    .then((response: any) => response.json());
+};

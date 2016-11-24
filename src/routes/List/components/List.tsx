@@ -1,27 +1,21 @@
 import * as React from 'react';
 import {Button, Table, Popconfirm, Row, Col, Icon} from 'antd';
-import './style.less';
-import {height} from '../../../layouts/CoreLayout/CoreLayout'
-import SearchInput from '../../../components/SearchInput'
-import ColumnPicker from "../../../components/ColumnPicker";
-import NormalTable from "../../../components/NormalTable";
-
+import {height} from '../../../layouts/CoreLayout/CoreLayout';
+import SearchInput from '../../../components/SearchInput';
+import ColumnPicker from '../../../components/ColumnPicker';
+import NormalTable from '../../../components/NormalTable';
 
 export interface ListProps {
-  listState: any,
-
-  onRowSelectChange: any,
-  selectedRowKeys: any[],
-  selectedRows: any[],
-
-  fetchList: any,
-  fetchEdit: (id: any) => void,
-
-  fetchDel: any,
-  multiDel: any,
-  loadEditData: any,
-  onSearch: any,
-
+  listState: any;
+  onRowSelectChange: any;
+  selectedRowKeys: any[];
+  selectedRows: any[];
+  fetchList: any;
+  fetchEdit: (id: any) => void;
+  fetchDelete: any;
+  multiDel: any;
+  loadEditData: any;
+  onSearch: any;
 }
 
 class List extends React.Component<ListProps, any> {
@@ -59,17 +53,17 @@ class List extends React.Component<ListProps, any> {
       width: '20%',
       render: ((text: String, record: any, index: number) =><div>
         <a
-          href="javascript:void(0)"
-          onClick={()=>this.props.fetchEdit(record.id)}
+          href='javascript:void(0)'
+          onClick={() => this.props.fetchEdit(record.id)}
         >
           修改
         </a>
         <Popconfirm
-          title="确定要删除这个品牌吗？"
-          onConfirm={()=>this.props.fetchDel([record.id])}
+          title='确定要删除这个品牌吗？'
+          onConfirm={() => this.props.fetchDelete([record.id])}
         >
           <a
-            href="javascript:void(0)"
+            href='javascript:void(0)'
             style={{marginLeft: 8, marginRight: 8}}>
             删除
           </a>
@@ -87,29 +81,29 @@ class List extends React.Component<ListProps, any> {
     return (<div>
       <Row style={{marginBottom: 16}}>
         <Col span={12}>
-          <Popconfirm title="确定要删除这些品牌吗？"
-                      placement="bottomLeft"
-                      onConfirm={()=>this.props.loadEditData(-1)}>
-            <Button type="primary"
-                    disabled={listState.selectedRowKeys.length==0}
+          <Popconfirm title='确定要删除这些品牌吗？'
+                      placement='bottomLeft'
+                      onConfirm={()=>this.props.fetchDelete(listState.selectedRowKeys)}>
+            <Button type='primary'
+                    disabled={listState.selectedRowKeys.length === 0}
                     loading={listState.delLoading}>
               删除
             </Button>
           </Popconfirm>
-          <Button type="ghost"
+          <Button type='ghost'
                   style={{marginLeft: 8}}
                   onClick={()=>this.props.fetchEdit(-1)}>
             新增
           </Button>
 
-          <Button type="ghost" style={{marginLeft: 8}} onClick={this.props.fetchList}>
-            <Icon type="reload"/>
+          <Button type='ghost' style={{marginLeft: 8}} onClick={this.props.fetchList}>
+            <Icon type='reload'/>
           </Button>
         </Col>
         <Col span={12}
              style={{float: 'right'}}>
           <SearchInput
-            placeholder="请输入品牌名称"
+            placeholder='请输入品牌名称'
             onSearch={this.props.onSearch}
             style={{float: 'right', width: 200}}/>
           <ColumnPicker

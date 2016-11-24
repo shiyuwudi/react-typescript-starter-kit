@@ -4,7 +4,8 @@
 import {
   LIST,
   LIST_LOADING,
-  ROWSELECT
+  ROW_SELECT,
+  DELETE_LOADING
 } from '../actions/actionTypes';
 
 const ACTION_HANDLERS = {
@@ -24,10 +25,15 @@ const ACTION_HANDLERS = {
       listLoading: action.data
     });
   },
-  [ROWSELECT]: (state: any, action: any) => {
+  [ROW_SELECT]: (state: any, action: any) => {
     return Object.assign({}, state, {
       selectedRowKeys: action.selectedRowKeys,
       selectedRows: action.selectedRows
+    });
+  },
+  [DELETE_LOADING]: (state: any, action: any) => {
+    return Object.assign({}, state, {
+      delLoading: action.data
     });
   },
 };
@@ -36,6 +42,7 @@ const ACTION_HANDLERS = {
 // Reducer
 // ------------------------------------
 const initialState: any = {
+  listLoading: false,
   delLoading: false,
   pagination: {},
   selectedRowKeys: [],
