@@ -3,7 +3,7 @@ import {
   LIST, LIST_LOADING, HIDE, ROW_SELECT, EDIT, EDIT_CHANGE, SAVE_LOADING,
   DELETE_LOADING
 } from './actionTypes';
-import {listApi, editApi, saveApi, deleteApi} from './service';
+import {listApi, editApi, saveApi, deleteApi} from '../../../service/goodsBrandService';
 
 const dispatchList = (data: any[]) => Object.assign({
   type: LIST
