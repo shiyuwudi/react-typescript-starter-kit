@@ -22,19 +22,42 @@ class List extends React.Component<ListProps, any> {
 
   constructor(props: ListProps) {
     super(props);
+    this.state = {};
   }
 
-  componentDidMount = ()=> {
+  componentDidMount = () => {
     this.props.fetchList();
   };
 
+  handleColumnChange = (select_columns: any) => {
+    this.setState({
+      select_columns: select_columns
+    });
+  };
+
+  customColumns = (table_head: any) => {
+    if (this.state.select_columns) {
+      let temp = []; // 存储实用的表头的临时变量
+      for (let index in this.state.select_columns) {
+        if (this.state.select_columns[index].show) {
+          for (let j in table_head) {
+            if (table_head[j].title === this.state.select_columns[index].title)
+              temp.push(table_head[j]);
+          }
+        }
+      }
+      table_head = temp;
+    }
+    return table_head;
+  };
+
   render() {
-    const columns = [{
+    let columns = [{
       title: '品牌序号',
       dataIndex: 'sequence',
       key: 'sequence',
       width: '20%',
-      render: ((text: String, record: any, index: number) => <div>{index + 1}</div>).bind(this)
+      render: ((text: String, record: any, index: number) => <div>{index + 1}</div>)
     }, {
       title: '品牌名称',
       dataIndex: 'goodsBrandName',
@@ -51,7 +74,7 @@ class List extends React.Component<ListProps, any> {
       dataIndex: 'x',
       key: 'x',
       width: '20%',
-      render: ((text: String, record: any, index: number) =><div>
+      render: ((text: String, record: any, index: number) => <div>
         <a
           href='javascript:void(0)'
           onClick={() => this.props.fetchEdit(record.id)}
@@ -70,8 +93,8 @@ class List extends React.Component<ListProps, any> {
         </Popconfirm>
       </div>).bind(this),
     }];
-
-    let {listState}=this.props;
+    columns = this.customColumns(columns);
+    let {listState} = this.props;
 
     const rowSelection = {
       onChange: this.props.onRowSelectChange,
@@ -108,9 +131,9 @@ class List extends React.Component<ListProps, any> {
             style={{float: 'right', width: 200}}/>
           <ColumnPicker
             columns={columns}
-            select_columns={[]}
+            select_columns={columns}
             style={{float: 'right', marginLeft: 8}}
-            handleColumnChange={this.props.loadEditData}/>
+            handleColumnChange={this.handleColumnChange}/>
         </Col>
       </Row>
 

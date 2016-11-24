@@ -3,7 +3,7 @@
  */
 import * as React from 'react';
 import {Popover, Button, Checkbox} from 'antd';
-import Sortable from 'sortablejs';
+import Sortable = require('sortablejs');
 
 interface SearchInputProps {
   columns: any[];
@@ -29,16 +29,16 @@ export default class ColumnPicker extends React.Component<SearchInputProps, any>
   };
 
 
-  reSort = (newarr: any)=> {
+  reSort = (newarr: any) => {
     this.setState({
-      newarr: newarr,
+      newarr,
       sorted: true
     });
     this.props.handleColumnChange(newarr);
   };
 
 
-  sortableGroupDecorator = (componentBackingInstance: any)=> {
+  sortableGroupDecorator = (componentBackingInstance: any) => {
     let select_columns = this.state.select_columns;
     let handleColumnChange = this.reSort;
     // check if backing instance not null
@@ -55,13 +55,13 @@ export default class ColumnPicker extends React.Component<SearchInputProps, any>
           let mylist = itemEl.childNodes;
           for (let i = 0; i < mylist.length; i++) {
             let li = mylist[i].childNodes[0];
-            arr.push(li.innerText)
+            arr.push(li.innerText);
           }
 
           let newarr: any[] = [];
           for (let i in arr) {
             for (let j in select_columns) {
-              if (arr[i] == select_columns[j].title)
+              if (arr[i] === select_columns[j].title)
                 newarr.push(select_columns[j]);
             }
           }
@@ -79,26 +79,26 @@ export default class ColumnPicker extends React.Component<SearchInputProps, any>
   };
 
 
-  onMouseOver = (column: any)=> {
+  onMouseOver = (column: any) => {
     column.move = true;
     this.forceUpdate();
   };
 
 
-  onMouseOut = (column: any)=> {
+  onMouseOut = (column: any) => {
     column.move = false;
     this.forceUpdate();
   };
 
 
-  onChange = (column: any)=> {
+  onChange = (column: any) => {
     column.show = !column.show;
     this.props.handleColumnChange(this.state.newarr);
   };
 
 
   componentDidMount = () => {
-    let columns = this.props.columns;
+    let {columns} = this.props;
 
     let select_columns: any[] = [];
     for (let index in columns) {
@@ -110,11 +110,11 @@ export default class ColumnPicker extends React.Component<SearchInputProps, any>
     this.setState({
       newarr: select_columns,
       select_columns: select_columns
-    })
+    });
   };
 
 
-  componentWillReceiveProps = (nextProps: any)=> {
+  componentWillReceiveProps = (nextProps: any) => {
     if (!this.state.sorted) {
       let columns = nextProps.select_columns;
       if (columns) {
@@ -134,13 +134,14 @@ export default class ColumnPicker extends React.Component<SearchInputProps, any>
       carr.push(<div
         style={{'padding': '5px 0'}}
         key={index}
-        onMouseOver={()=>this.onMouseOver(column)}
-        onMouseOut={()=>this.onMouseOut(column)}
+        onMouseOver={() => this.onMouseOver(column)}
+        onMouseOut={() => this.onMouseOut(column)}
       >
         <label>
           <Checkbox
             checked={column.show}
-            onChange={()=>this.onChange(column)}
+            onChange={() => this.onChange(column)}
+            style={{marginRight: 4}}
           />
           {column.title}
         </label>
@@ -153,7 +154,7 @@ export default class ColumnPicker extends React.Component<SearchInputProps, any>
       </div>);
     }
     let content = (
-      <div className='chack_list'>
+      <div className='column-picker-content'>
         <div ref={this.sortableGroupDecorator}>
           {carr}
         </div>
