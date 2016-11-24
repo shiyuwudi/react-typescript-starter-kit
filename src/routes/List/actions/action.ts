@@ -1,59 +1,41 @@
-import {LIST, LIST_LOADING, DETAIL, HIDE, ROWSELECT, EDIT, EDITCHANGE} from "./actionTypes";
+import {LIST, LIST_LOADING, DETAIL, HIDE, ROWSELECT, EDIT, EDITCHANGE, SAVE} from './actionTypes';
+import {listApi, editApi, saveApi} from './service';
 
-const dispatchList = (data: any[])=> {
-  return Object.assign({
-    type: LIST
-  }, data);
-};
-const dispatchListLoading = (data: boolean)=> {
-  return {
-    type: LIST_LOADING,
-    data: data
-  }
-};
-const dispatchEdit = (data: any)=> {
-  return {
-    type: EDIT,
-    data: data
-  };
-};
+const dispatchList = (data: any[]) => Object.assign({
+  type: LIST
+}, data);
+const dispatchListLoading = (data: boolean) => ({
+  type: LIST_LOADING,
+  data: data
+});
+const dispatchEdit = (data: any) => ({
+  type: EDIT,
+  data: data
+});
+const dispatchSave = (data: any) => ({
+  type: SAVE,
+  data: data
+});
+
 
 export const fetchList = (pagination: any) => {
   return (dispatch: any, getState: any) => {
     dispatch(dispatchListLoading(true));
-
-    let formData = new FormData();
-    for (let i in pagination) {
-      formData.append(i, pagination[i]);
-    }
-
-    fetch('/erp/brand_list.htm', {
-      credentials: 'same-origin',
-      method: "POST",
-      body: formData
-    })
-      .then((response: any) => response.json())
+    listApi(pagination)
       .then((response: any) => {
         dispatch(dispatchList(response));
       })
       .catch((err) => {
         dispatch(dispatchListLoading(false));
-        console.log("rejected:", err)
+        console.log('rejected:', err);
       });
   };
 };
 
 export const fetchEdit = (id: any) => {
   return (dispatch: any, getState: any) => {
-    if (id != -1) {
-      let formData = new FormData();
-      formData.append('id', id);
-      fetch('/erp/brand_load.htm', {
-        credentials: 'same-origin',
-        method: "POST",
-        body: formData
-      })
-        .then((response: any) => response.json())
+    if (id !== -1) {
+      editApi({id})
         .then((response: any) => {
           dispatch(dispatchEdit(response.data));
         })
@@ -74,7 +56,7 @@ export const hide = () => {
   };
 };
 
-export const onRowSelectChange = ((selectedRowKeys: any, selectedRows: any)=> {
+export const onRowSelectChange = ((selectedRowKeys: any, selectedRows: any) => {
   return (dispatch: any, getState: any) => {
     console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
     dispatch({
@@ -94,8 +76,14 @@ export const onFormChange = (data: any) => {
   };
 };
 
-export const onFormSubmit = (data: any) => {
+export const onFormSubmit = (form: any) => {
   return (dispatch: any, getState: any) => {
-    console.log(getState());
+    saveApi(form)
+      .then((response: any) => {
+        dispatch(dispatchSave(response.data));
+      })
+      .catch((err) => {
+
+      });
   };
 };

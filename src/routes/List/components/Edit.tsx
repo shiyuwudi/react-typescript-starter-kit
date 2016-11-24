@@ -15,12 +15,22 @@ class Edit extends React.Component<EditProps, any> {
     super(props);
   }
 
+  handleSubmit = () => {
+    this.props.form.validateFields((err: any, values: any) => {
+      if (!err) {
+        if (this.props.editState.edit.id) {
+          values.id = this.props.editState.edit.id;
+        }
+        this.props.onFormSubmit(values);
+      }
+    });
+  };
+
   render() {
 
     let {
       editState,
-      hide,
-      onFormSubmit
+      hide
     } = this.props;
 
     const {getFieldDecorator} = this.props.form;
@@ -32,7 +42,7 @@ class Edit extends React.Component<EditProps, any> {
     return (
       <Modal title='详情'
              visible={editState.visible}
-             onOk={onFormSubmit}
+             onOk={this.handleSubmit}
              onCancel={hide}>
         <Form horizontal>
           <FormItem
