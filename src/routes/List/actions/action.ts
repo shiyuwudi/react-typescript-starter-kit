@@ -124,6 +124,7 @@ export const fetchDelete = (ids: any[]) => {
         message.success('删除成功');
         dispatch(dispatchRowSelectChange([], []));
         dispatch(dispatchListLoading(true));
+        dispatch(dispatchDeleteLoading(false));
         return listApi({});
       })
       .then((response: any) => {
