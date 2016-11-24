@@ -1,4 +1,4 @@
-import {LIST, LIST_LOADING, DETAIL, HIDE, ROWSELECT, EDIT} from "./actionTypes";
+import {LIST, LIST_LOADING, DETAIL, HIDE, ROWSELECT, EDIT, EDITCHANGE} from "./actionTypes";
 
 const dispatchList = (data: any[])=> {
   return Object.assign({
@@ -85,3 +85,17 @@ export const onRowSelectChange = ((selectedRowKeys: any, selectedRows: any)=> {
   };
 });
 
+export const onFormChange = (data: any) => {
+  return (dispatch: any, getState: any) => {
+    dispatch({
+      type: EDITCHANGE,
+      data: data
+    });
+  };
+};
+
+export const onFormSubmit = (data: any) => {
+  return (dispatch: any, getState: any) => {
+    console.log(getState());
+  };
+};

@@ -1,12 +1,15 @@
 import * as React from 'react';
-import {Modal} from 'antd';
+import {Form, Icon, Input, Button, Checkbox, Modal} from 'antd';
+const FormItem = Form.Item;
 
 export interface EditProps {
   editState: any;
   hide: any;
+  form: any;
+  onFormSubmit: any
 }
 
-class List extends React.Component<EditProps, any> {
+class Edit extends React.Component<EditProps, any> {
 
   constructor(props: EditProps) {
     super(props);
@@ -16,17 +19,42 @@ class List extends React.Component<EditProps, any> {
 
     let {
       editState,
-      hide
+      hide,
+      onFormSubmit
     } = this.props;
 
-    return (<Modal title='详情'
-                   visible={editState.visible}
-                   onOk={hide}
-                   onCancel={hide}
-    >
-      asd
-    </Modal>);
+    const {getFieldDecorator} = this.props.form;
+    const formItemLayout = {
+      labelCol: {span: 8},
+      wrapperCol: {span: 12},
+    };
+
+    return (
+      <Modal title='详情'
+             visible={editState.visible}
+             onOk={onFormSubmit}
+             onCancel={hide}>
+        <Form horizontal>
+          <FormItem
+            {...formItemLayout}
+            label='品牌名称：'>
+            {getFieldDecorator('goodsBrandName', {
+              rules: [{required: true, message: '请填写品牌名称'}],
+            })(
+              <Input placeholder='品牌名称'/>
+            )}
+          </FormItem>
+        </Form>
+      </Modal>
+    );
   }
 }
 
-export default List;
+export default Form.create({
+  onFieldsChange(props, changedFields) {
+    props.onFormChange(changedFields);
+  },
+  mapPropsToFields(props) {
+    return props.editState.edit;
+  },
+})(Edit);

@@ -1,32 +1,39 @@
 /**
  * Created by lixiaoyang on 2016/10/29.
  */
-import {DETAIL, HIDE, EDIT} from '../actions/actionTypes';
+import {HIDE, EDIT, EDITCHANGE} from '../actions/actionTypes';
 
 const ACTION_HANDLERS = {
   [EDIT]: (state: any, action: any) => {
+    const eData = action.data;
     return Object.assign({}, state, {
-      visible: true
+      visible: true,
+      edit: {
+        id: eData.id,
+        goodsBrandName: {
+          value: eData.goodsBrandName
+        },
+      }
     });
   },
-
-  [DETAIL]: (state: any, action: any) => {
-    return {
-      data: action.data,
-      visible: true
-    };
-  },
   [HIDE]: (state: any, action: any) => {
-    return {
+    return Object.assign({}, state, {
       visible: false
-    };
+    });
+  },
+  [EDITCHANGE]: (state: any, action: any) => {
+    return Object.assign({}, state, {
+      edit: Object.assign(state.edit, action.data)
+    });
   },
 };
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState: any = {visible: false};
+const initialState: any = {
+  visible: false, edit: {}
+};
 export default function listReducer(state = initialState, action: any) {
   const handler = ACTION_HANDLERS[action.type];
 

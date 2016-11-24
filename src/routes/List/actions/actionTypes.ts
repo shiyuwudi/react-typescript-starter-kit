@@ -9,3 +9,5 @@ export const SAVE_LOADING: string = PATH + 'SAVE_LOADING';
 export const DETAIL: string = PATH + 'DETAIL';
 export const HIDE: string = PATH + 'HIDE';
 export const ROWSELECT: string = PATH + 'ROWSELECT';
+export const EDITCHANGE: string = PATH + 'EDITCHANGE';
+
