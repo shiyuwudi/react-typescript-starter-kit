@@ -42,6 +42,7 @@ export default class NormalTable extends React.Component<NormalTableProps, any> 
 
     return (
       <Table
+        rowKey='id'
         onChange={this.handleTableChange}
         pagination={pagination}
         {...this.props}/>

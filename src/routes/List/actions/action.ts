@@ -1,3 +1,4 @@
+import {message} from 'antd';
 import {LIST, LIST_LOADING, DETAIL, HIDE, ROWSELECT, EDIT, EDITCHANGE, SAVE} from './actionTypes';
 import {listApi, editApi, saveApi} from './service';
 
@@ -12,11 +13,9 @@ const dispatchEdit = (data: any) => ({
   type: EDIT,
   data: data
 });
-const dispatchSave = (data: any) => ({
-  type: SAVE,
-  data: data
+const dispatchHide = () => ({
+  type: HIDE
 });
-
 
 export const fetchList = (pagination: any) => {
   return (dispatch: any, getState: any) => {
@@ -50,9 +49,7 @@ export const fetchEdit = (id: any) => {
 
 export const hide = () => {
   return (dispatch: any, getState: any) => {
-    dispatch({
-      type: HIDE,
-    });
+    dispatch(dispatchHide());
   };
 };
 
@@ -80,10 +77,21 @@ export const onFormSubmit = (form: any) => {
   return (dispatch: any, getState: any) => {
     saveApi(form)
       .then((response: any) => {
-        dispatch(dispatchSave(response.data));
+        if (response.status !== 'BRAND_IS_SAVED') {
+          let error: any = new Error();
+          error.status = response.status;
+          throw error;
+        }
+        message.success('保存成功');
+        dispatch(dispatchHide());
+        dispatch(dispatchListLoading(true));
+        return listApi({});
+      })
+      .then((response: any) => {
+        dispatch(dispatchList(response));
       })
       .catch((err) => {
-
+        message.error('保存失败');
       });
   };
 };
