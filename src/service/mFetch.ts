@@ -2,6 +2,7 @@
  * Created by lixiaoyang on 2016/11/24.
  */
 import {message} from 'antd';
+import {DTOInterface} from '../interface/dtoInterface';
 
 const form2Form = (form: any) => {
   let formData = new FormData();
@@ -19,7 +20,7 @@ export const mFetch = (url: string, form: any) => {
     body: formData
   })
     .then((response: any) => response.json())
-    .then((response: any) => {
+    .then((response: DTOInterface) => {
       if (response.msg) {
         message.info(response.msg);
       }

@@ -2,7 +2,7 @@ import * as React from 'react';
 import {browserHistory, Router} from 'react-router';
 import {Provider} from 'react-redux';
 
-export interface AppProps {
+interface AppProps {
   routes: any;
   store: any;
 }

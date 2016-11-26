@@ -4,15 +4,17 @@ import {
   DELETE_LOADING
 } from './actionTypes';
 import {listApi, editApi, saveApi, deleteApi} from '../../../service/goodsBrandService';
+import {dispatchListLoadingInterface} from '../../../interface/actionInterface';
+import {GoodsBrandDTO, GoodsBrand} from '../../../interface/goodsBrandInterface';
 
-const dispatchList = (data: any[]) => Object.assign({
+const dispatchList = (data: GoodsBrandDTO[]) => Object.assign({
   type: LIST
 }, data);
-const dispatchListLoading = (data: boolean) => ({
+const dispatchListLoading: dispatchListLoadingInterface = (data: boolean) => ({
   type: LIST_LOADING,
   data: data
 });
-const dispatchEdit = (data: any) => ({
+const dispatchEdit = (data: GoodsBrand) => ({
   type: EDIT,
   data: data
 });
@@ -27,7 +29,7 @@ const dispatchDeleteLoading = (data: boolean) => ({
   type: DELETE_LOADING,
   data: data
 });
-const dispatchRowSelectChange = (selectedRowKeys: any, selectedRows: any) => ({
+const dispatchRowSelectChange = (selectedRowKeys: number[], selectedRows: GoodsBrand[]) => ({
   type: ROW_SELECT,
   selectedRowKeys,
   selectedRows
@@ -50,7 +52,7 @@ export const fetchList = (pagination: any) => {
   };
 };
 
-export const fetchEdit = (id: any) => {
+export const fetchEdit = (id: number) => {
   return (dispatch: any, getState: any) => {
     if (id !== -1) {
       editApi({id})
@@ -72,7 +74,7 @@ export const hide = () => {
   };
 };
 
-export const onRowSelectChange = ((selectedRowKeys: any, selectedRows: any) => {
+export const onRowSelectChange = ((selectedRowKeys: number[], selectedRows: GoodsBrand[]) => {
   return (dispatch: any, getState: any) => {
     dispatch(dispatchRowSelectChange(selectedRowKeys, selectedRows));
   };
@@ -84,7 +86,7 @@ export const onFormChange = (data: any) => {
   };
 };
 
-export const onFormSubmit = (form: any) => {
+export const onFormSubmit = (form: GoodsBrand) => {
   return (dispatch: any, getState: any) => {
     dispatch(dispatchSaveLoading(true));
     saveApi(form)
