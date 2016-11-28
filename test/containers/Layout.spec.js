@@ -1,14 +1,10 @@
 import React from 'react';
 import {expect} from 'chai';
-import {shallow,mount} from 'enzyme';
+import {shallow, mount} from 'enzyme';
 import Layout from '../../src/layouts/CoreLayout/CoreLayout';
 
 describe('(layout) Core', () => {
   const wrapper = mount(<Layout />);
-
-  it('renders as a <div>', () => {
-    expect(wrapper.type()).to.eql('div');
-  });
 
   it('循环测试左侧导航划过变变亮', () => {
     let wrapper = mount(<Layout />);
@@ -30,11 +26,11 @@ describe('(layout) Core', () => {
     let wrapper = mount(<Layout />);
     wrapper.find('.ant-menu-item').forEach(function (node) {
 
-        node.simulate('click');
-        expect(node.hasClass('ant-menu-item-selected')).to.equal(true);
+      node.simulate('click');
+      expect(node.hasClass('ant-menu-item-selected')).to.equal(true);
 
-        node.simulate('mouseenter');
-        expect(node.hasClass('ant-menu-item-active')).to.equal(true);
+      node.simulate('mouseenter');
+      expect(node.hasClass('ant-menu-item-active')).to.equal(true);
 
     });
   });
@@ -55,7 +51,6 @@ describe('(layout) Core', () => {
     wrapper.find('.ant-aside-action').simulate('click');
     expect(wrapper.find('.ant-layout-aside')).to.have.length(1);
   });
-
 
 
 });
