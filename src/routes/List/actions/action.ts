@@ -4,13 +4,13 @@ import {
   DELETE_LOADING
 } from './actionTypes';
 import {listApi, editApi, saveApi, deleteApi} from '../../../service/goodsBrandService';
-import {dispatchListLoadingInterface} from '../../../interface/actionInterface';
+import {DispatchListLoadingInterface} from '../../../interface/actionInterface';
 import {GoodsBrandDTO, GoodsBrand} from '../../../interface/goodsBrandInterface';
 
 const dispatchList = (data: GoodsBrandDTO[]) => Object.assign({
   type: LIST
 }, data);
-const dispatchListLoading: dispatchListLoadingInterface = (data: boolean) => ({
+const dispatchListLoading: DispatchListLoadingInterface = (data: boolean) => ({
   type: LIST_LOADING,
   data: data
 });
