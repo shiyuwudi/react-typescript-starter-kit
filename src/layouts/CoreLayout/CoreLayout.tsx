@@ -1,68 +1,83 @@
-import * as React from 'react'
-import {Menu, Breadcrumb, Icon} from 'antd';
+import * as React from 'react';
+import {Menu, Icon, Tabs} from 'antd';
 const SubMenu = Menu.SubMenu;
-import './style.less'
+const MenuItemGroup = Menu.ItemGroup;
+const TabPane = Tabs.TabPane;
+import './style.less';
 
-export interface CoreLayoutProps {
+interface CoreLayoutProps {
   children?: any;
 }
 interface CoreLayoutState {
-  collapse: boolean;
+  current?: any;
 }
-
 export let height = 0;
 
 class CoreLayout extends React.Component<CoreLayoutProps, CoreLayoutState> {
 
   constructor(props: any, context: any) {
     super(props, context);
-    height = document.body.clientHeight - 280;
+    height = document.body.clientHeight - 240;
     this.state = {
-      collapse: true,
+      current: 'brandList'
     };
   }
 
-  componentDidMount = ()=> {
-    window.onresize = ()=> {
-      height = document.body.clientHeight - 280;
-    }
+  handleClick = (e: any) => {
+    console.log('click ', e);
+    this.setState({
+      current: e.key,
+    });
   };
 
-  onCollapseChange = ()=> {
-    this.setState({
-      collapse: !this.state.collapse,
-    })
+  componentDidMount = () => {
+    window.onresize = () => {
+      height = document.body.clientHeight - 240;
+    };
   };
 
   render() {
-
-    const collapse = this.state.collapse;
     return (
-      <div className={collapse ? 'ant-layout-aside ant-layout-aside-collapse' : 'ant-layout-aside'}>
-        <aside className='ant-layout-sider'>
-          <div className='ant-layout-logo'></div>
-          <Menu mode='inline' theme='dark' defaultSelectedKeys={['user']}>
-            <Menu.Item key='user'>
-              <Icon type='user'/><span className='nav-text'>导航一</span>
-            </Menu.Item>
-            <Menu.Item key='setting'>
-              <Icon type='setting'/><span className='nav-text'>导航二</span>
-            </Menu.Item>
-            <Menu.Item key='laptop'>
-              <Icon type='laptop'/><span className='nav-text'>导航三</span>
-            </Menu.Item>
-            <Menu.Item key='notification'>
-              <Icon type='notification'/><span className='nav-text'>导航四</span>
-            </Menu.Item>
-            <Menu.Item key='folder'>
-              <Icon type='folder'/><span className='nav-text'>导航五</span>
-            </Menu.Item>
-          </Menu>
-          <div className='ant-aside-action' onClick={this.onCollapseChange}>
-            {collapse ? <Icon type='right'/> : <Icon type='left'/>}
-          </div>
-        </aside>
+      <div className={'ant-layout-aside'}>
+        <Menu onClick={this.handleClick}
+              selectedKeys={[this.state.current]}
+              mode='horizontal'
+        >
+          <SubMenu title={'基础资料'}>
+            <MenuItemGroup title='Item 1'>
+              <Menu.Item key='setting:1'>Option 1</Menu.Item>
+              <Menu.Item key='setting:2'>Option 2</Menu.Item>
+            </MenuItemGroup>
+            <MenuItemGroup title='Item 2'>
+              <Menu.Item key='setting:3'>Option 3</Menu.Item>
+              <Menu.Item key='setting:4'>Option 4</Menu.Item>
+            </MenuItemGroup>
+          </SubMenu>
+          <SubMenu title={'商品管理'}>
+            <Menu.Item key='brandList'>商品品牌</Menu.Item>
+            <Menu.Item key='goodsCatList'>商品分类</Menu.Item>
+          </SubMenu>
 
+          <Menu.Item key='mail'>
+            <Icon type='mail'/>Navigation One
+          </Menu.Item>
+          <Menu.Item key='app' disabled>
+            <Icon type='appstore'/>Navigation Two
+          </Menu.Item>
+          <SubMenu title={<span><Icon type='setting' />Navigation Three - Submenu</span>}>
+            <MenuItemGroup title='Item 1'>
+              <Menu.Item key='setting:1'>Option 1</Menu.Item>
+              <Menu.Item key='setting:2'>Option 2</Menu.Item>
+            </MenuItemGroup>
+            <MenuItemGroup title='Item 2'>
+              <Menu.Item key='setting:3'>Option 3</Menu.Item>
+              <Menu.Item key='setting:4'>Option 4</Menu.Item>
+            </MenuItemGroup>
+          </SubMenu>
+          <Menu.Item key='alipay'>
+            <a href='https://ant.design' target='_blank' rel='noopener noreferrer'>Navigation Four - Link</a>
+          </Menu.Item>
+        </Menu>
         <div className='ant-layout-main'>
           <div className='ant-layout-content'>
             {this.props.children}
