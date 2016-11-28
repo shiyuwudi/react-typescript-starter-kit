@@ -12,7 +12,7 @@ export const listApi = (form: any) => {
     method: 'post',
     data: form,
     type: 'jsonp',
-  }
+  };
 
   return mFetch('/erp/brand_list.htm', form);
 };
