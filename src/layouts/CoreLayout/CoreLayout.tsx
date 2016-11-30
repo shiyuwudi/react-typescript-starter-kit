@@ -13,7 +13,7 @@ interface CoreLayoutState {
 }
 export let height = 0;
 
-class CoreLayout extends React.Component<CoreLayoutProps, CoreLayoutState> {
+export default class CoreLayout extends React.Component<CoreLayoutProps, CoreLayoutState> {
 
   constructor(props: any, context: any) {
     super(props, context);
@@ -88,5 +88,3 @@ class CoreLayout extends React.Component<CoreLayoutProps, CoreLayoutState> {
   }
 
 }
-
-export default CoreLayout;

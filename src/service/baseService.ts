@@ -1,5 +1,3 @@
-import {mFetch} from './mFetch';
-
 export const listApi = (form: any) => {
   let a = {
     url: '/erp/load_usertable.htm?callback=callback',
@@ -14,6 +12,10 @@ export const listApi = (form: any) => {
     type: 'jsonp',
   };
 
-  return mFetch('/erp/brand_list.htm', form);
+  return form;
+};
+
+export const listApi2 = (form: any) => {
+
 };
 

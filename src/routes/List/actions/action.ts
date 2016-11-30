@@ -5,9 +5,10 @@ import {
 } from './actionTypes';
 import {listApi, editApi, saveApi, deleteApi} from '../../../service/goodsBrandService';
 import {DispatchListLoadingInterface} from '../../../interface/actionInterface';
-import {GoodsBrandDTO, GoodsBrand} from '../../../interface/goodsBrandInterface';
+import {GoodsBrand} from '../../../interface/goodsBrandInterface';
+import {DTOInterface} from '../../../interface/dtoInterface';
 
-const dispatchList = (data: GoodsBrandDTO[]) => Object.assign({
+const dispatchList = (data: DTOInterface) => Object.assign({
   type: LIST
 }, data);
 const dispatchListLoading: DispatchListLoadingInterface = (data: boolean) => ({
@@ -43,10 +44,10 @@ export const fetchList = (pagination: any) => {
   return (dispatch: any, getState: any) => {
     dispatch(dispatchListLoading(true));
     listApi(pagination)
-      .then((response: any) => {
+      .then((response: DTOInterface) => {
         dispatch(dispatchList(response));
       })
-      .catch((err) => {
+      .always((err) => {
         dispatch(dispatchListLoading(false));
       });
   };
@@ -56,10 +57,10 @@ export const fetchEdit = (id: number) => {
   return (dispatch: any, getState: any) => {
     if (id !== -1) {
       editApi({id})
-        .then((response: any) => {
+        .then((response: DTOInterface) => {
           dispatch(dispatchEdit(response.data));
         })
-        .catch((err) => {
+        .fail((err) => {
           dispatch(dispatchEdit({}));
         });
     } else {
@@ -90,26 +91,25 @@ export const onFormSubmit = (form: GoodsBrand) => {
   return (dispatch: any, getState: any) => {
     dispatch(dispatchSaveLoading(true));
     saveApi(form)
-      .then((response: any) => {
+      .then((response: DTOInterface) => {
         if (response.status !== 'BRAND_IS_SAVED') {
-          let error: any = new Error();
-          error.msg = response.msg;
-          throw error;
+          message.error('保存失败');
+          return;
         }
         message.success('保存成功');
         dispatch(dispatchHide());
         dispatch(dispatchListLoading(true));
-        return listApi({});
+        listApi({})
+          .then((response: DTOInterface) => {
+            dispatch(dispatchList(response));
+          });
       })
-      .then((response: any) => {
-        dispatch(dispatchList(response));
+      .fail((err) => {
+        message.error('保存失败');
       })
-      .catch((err) => {
+      .always((data: any) => {
         dispatch(dispatchListLoading(false));
         dispatch(dispatchSaveLoading(false));
-        if (!err.msg) {
-          message.error('保存失败');
-        }
       });
   };
 };
@@ -117,37 +117,36 @@ export const fetchDelete = (ids: any[]) => {
   return (dispatch: any, getState: any) => {
     dispatch(dispatchDeleteLoading(true));
     deleteApi({ids: ids.join(',')})
-      .then((response: any) => {
+      .then((response: DTOInterface) => {
         if (response.status !== 'BRAND_IS_DELETED') {
-          let error: any = new Error();
-          error.msg = response.msg;
-          throw error;
+          message.error('删除失败');
+          return;
         }
         message.success('删除成功');
-        dispatch(dispatchRowSelectChange([], []));
         dispatch(dispatchListLoading(true));
-        dispatch(dispatchDeleteLoading(false));
-        return listApi({});
+        listApi({})
+          .then((response: DTOInterface) => {
+            dispatch(dispatchList(response));
+          });
       })
-      .then((response: any) => {
-        dispatch(dispatchList(response));
+      .fail((err) => {
+        message.success('删除失败');
       })
-      .catch((err) => {
+      .always((data: any) => {
         dispatch(dispatchDeleteLoading(false));
-        if (!err.msg) {
-          message.success('删除失败');
-        }
+        dispatch(dispatchRowSelectChange([], []));
+        dispatch(dispatchListLoading(false));
       });
   };
 };
-export const onSearch = (form: any[]) => {
+export const onSearch = (form: any) => {
   return (dispatch: any, getState: any) => {
     dispatch(dispatchListLoading(true));
     listApi(form)
-      .then((response: any) => {
+      .then((response: DTOInterface) => {
         dispatch(dispatchList(response));
       })
-      .catch((err) => {
+      .always((data: any) => {
         dispatch(dispatchListLoading(false));
       });
   };
