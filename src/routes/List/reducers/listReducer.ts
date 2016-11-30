@@ -18,7 +18,9 @@ const ACTION_HANDLERS = {
         currentPage: action.currentPage,
         keyword: action.keyword
       },
-      listLoading: false
+      listLoading: false,
+      selectedRowKeys: [],
+      selectedRows: []
     });
   },
   [LIST_LOADING]: (state: any, action: any) => {

@@ -79,7 +79,6 @@
   "dependencies": {
     "@types/classnames": "0.0.32",
     "@types/history": "^2.0.39",
-    "@types/isomorphic-fetch": "0.0.31",
     "@types/react": "^0.14.50",
     "@types/react-dom": "^0.14.19",
     "@types/react-redux": "^4.4.33",
