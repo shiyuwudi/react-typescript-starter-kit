@@ -16,6 +16,7 @@ const ACTION_HANDLERS = {
         total: action.total,
         pageSize: action.pageSize,
         currentPage: action.currentPage,
+        keyword: action.keyword
       },
       listLoading: false
     });
@@ -47,6 +48,7 @@ const initialState: any = {
   pagination: {},
   selectedRowKeys: [],
   selectedRows: [],
+  keyword: ''
 };
 export default function listReducer(state = initialState, action: any) {
   const handler = ACTION_HANDLERS[action.type];

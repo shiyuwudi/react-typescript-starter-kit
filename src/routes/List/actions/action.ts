@@ -8,8 +8,9 @@ import {DispatchListLoadingInterface} from '../../../interface/actionInterface';
 import {GoodsBrand} from '../../../interface/goodsBrandInterface';
 import {DTOInterface} from '../../../interface/dtoInterface';
 
-const dispatchList = (data: DTOInterface) => Object.assign({
-  type: LIST
+const dispatchList = (data: DTOInterface, keyword: string) => Object.assign({
+  type: LIST,
+  keyword
 }, data);
 const dispatchListLoading: DispatchListLoadingInterface = (data: boolean) => ({
   type: LIST_LOADING,
@@ -40,12 +41,20 @@ const dispatchFormChange = (data: any) => ({
   data: data
 });
 
-export const fetchList = (pagination: any) => {
+export const fetchList = (pagination: any = {}) => {
   return (dispatch: any, getState: any) => {
+    let {
+      currentPage,
+      pageSize,
+      keyword
+    } = getState().listReducer.pagination;
+    pagination.currentPage = pagination.currentPage || currentPage;
+    pagination.pageSize = pagination.pageSize || pageSize;
+    pagination.goodsBrandName = pagination.goodsBrandName || keyword;
     dispatch(dispatchListLoading(true));
     listApi(pagination)
       .then((response: DTOInterface) => {
-        dispatch(dispatchList(response));
+        dispatch(dispatchList(response, pagination.goodsBrandName));
       })
       .always((err) => {
         dispatch(dispatchListLoading(false));
@@ -101,7 +110,7 @@ export const onFormSubmit = (form: GoodsBrand) => {
         dispatch(dispatchListLoading(true));
         listApi({})
           .then((response: DTOInterface) => {
-            dispatch(dispatchList(response));
+            dispatch(dispatchList(response, ''));
           });
       })
       .fail((err) => {
@@ -126,7 +135,7 @@ export const fetchDelete = (ids: any[]) => {
         dispatch(dispatchListLoading(true));
         listApi({})
           .then((response: DTOInterface) => {
-            dispatch(dispatchList(response));
+            dispatch(dispatchList(response, ''));
           });
       })
       .fail((err) => {
@@ -135,18 +144,6 @@ export const fetchDelete = (ids: any[]) => {
       .always((data: any) => {
         dispatch(dispatchDeleteLoading(false));
         dispatch(dispatchRowSelectChange([], []));
-        dispatch(dispatchListLoading(false));
-      });
-  };
-};
-export const onSearch = (form: any) => {
-  return (dispatch: any, getState: any) => {
-    dispatch(dispatchListLoading(true));
-    listApi(form)
-      .then((response: DTOInterface) => {
-        dispatch(dispatchList(response));
-      })
-      .always((data: any) => {
         dispatch(dispatchListLoading(false));
       });
   };

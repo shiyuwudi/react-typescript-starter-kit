@@ -24,7 +24,6 @@ export default class CoreLayout extends React.Component<CoreLayoutProps, CoreLay
   }
 
   handleClick = (e: any) => {
-    console.log('click ', e);
     this.setState({
       current: e.key,
     });

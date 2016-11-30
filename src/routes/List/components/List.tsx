@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Button, Table, Popconfirm, Row, Col, Icon} from 'antd';
+import {Button, Popconfirm, Row, Col, Icon} from 'antd';
 import {height} from '../../../layouts/CoreLayout/CoreLayout';
 import SearchInput from '../../../components/SearchInput';
 import ColumnPicker from '../../../components/ColumnPicker';
@@ -15,7 +15,6 @@ export interface ListProps {
   fetchDelete: any;
   multiDel: any;
   loadEditData: any;
-  onSearch: any;
 }
 
 class List extends React.Component<ListProps, any> {
@@ -119,7 +118,7 @@ class List extends React.Component<ListProps, any> {
             新增
           </Button>
 
-          <Button type='ghost' style={{marginLeft: 8}} onClick={this.props.fetchList}>
+          <Button type='ghost' style={{marginLeft: 8}} onClick={() => this.props.fetchList({})}>
             <Icon type='reload'/>
           </Button>
         </Col>
@@ -127,7 +126,7 @@ class List extends React.Component<ListProps, any> {
              style={{float: 'right'}}>
           <SearchInput
             placeholder='请输入品牌名称'
-            onSearch={(keyword) => this.props.onSearch({goodsBrandName:keyword})}
+            onSearch={(keyword) => this.props.fetchList({goodsBrandName:keyword})}
             style={{float: 'right', width: 200}}/>
           <ColumnPicker
             columns={columns}
