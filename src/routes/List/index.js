@@ -4,7 +4,6 @@
 import { injectReducer } from '../../store/reducers';
 
 export default store => ({
-  path: '／',
   getComponent(nextState, cb) {
     require.ensure([], (require) => {
       const ListContainer = require('./containers/ListContainer').default;
