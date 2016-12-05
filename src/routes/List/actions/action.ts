@@ -56,7 +56,7 @@ export const fetchList = (pagination: any = {}) => {
       .then((response: DTOInterface) => {
         dispatch(dispatchList(response, pagination.goodsBrandName));
       })
-      .always((err) => {
+      .always((err: any) => {
         dispatch(dispatchListLoading(false));
       });
   };
@@ -69,7 +69,7 @@ export const fetchEdit = (id: number) => {
         .then((response: DTOInterface) => {
           dispatch(dispatchEdit(response.data));
         })
-        .fail((err) => {
+        .fail((err: any) => {
           dispatch(dispatchEdit({}));
         });
     } else {
@@ -113,7 +113,7 @@ export const onFormSubmit = (form: GoodsBrand) => {
             dispatch(dispatchList(response, ''));
           });
       })
-      .fail((err) => {
+      .fail((err: any) => {
         message.error('保存失败');
       })
       .always((data: any) => {
@@ -138,7 +138,7 @@ export const fetchDelete = (ids: any[]) => {
             dispatch(dispatchList(response, ''));
           });
       })
-      .fail((err) => {
+      .fail((err: any) => {
         message.success('删除失败');
       })
       .always((data: any) => {
